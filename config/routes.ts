@@ -53,6 +53,12 @@
     redirect: '/welcome',
   },
   {
+    name: '我的页面',
+    icon: 'smile',
+    path: '/myPage',
+    component: './myPage',
+  },
+  {
     component: './404',
   },
 ];
