@@ -1,0 +1,131 @@
+.wrap {
+  .prioritySortRule {
+    margin: 20px 0 20px 12px;
+    padding: 8px 24px;
+    color: #8c8c8c;
+  }
+
+  .editBtn {
+    :global {
+      .ant-btn-link {
+        margin-right: 10px;
+        &:hover {
+          background-color: #f2fbff;
+        }
+      }
+    }
+  }
+
+  .editTable {
+    .rowData {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+
+      .itemLeft {
+        display: flex;
+        align-items: center;
+
+        .priorityEditor {
+          display: flex;
+          flex-flow: row;
+          margin-left: 12px;
+          overflow: hidden;
+
+          .inputStyle {
+            width: 250px;
+          }
+
+          .colorPicker {
+            display: flex;
+            align-items: center;
+            margin: 0 40px;
+
+            .colorItem {
+              box-sizing: content-box;
+              width: 16px;
+              height: 16px;
+              margin: 0 6px;
+              border-radius: 100%;
+              cursor: pointer;
+              opacity: 0.5;
+
+              &:not(.selected):hover {
+                width: 20px;
+                height: 20px;
+                margin: 0 4px;
+                opacity: 1;
+                transition: all 0.3s ease-in-out;
+              }
+            }
+
+            .selected {
+              margin: 0 3px;
+              border-style: solid;
+              border-width: 3px;
+              opacity: 1;
+            }
+          }
+
+          .colorTip {
+            overflow: hidden;
+            color: #8c8c8c;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+        }
+      }
+
+      .itemRight {
+        display: flex;
+
+        :global {
+          .anticon-close-circle {
+            color: #8c8c8c;
+            font-size: 16px;
+            &:hover {
+              color: #1b9aee;
+            }
+          }
+        }
+      }
+    }
+
+    .addData {
+      display: flex;
+      align-items: center;
+      height: 76px;
+    }
+
+    :global {
+      .ant-table-cell {
+        &:hover {
+          cursor: grab;
+        }
+      }
+    }
+  }
+
+  .showTable {
+    .showData {
+      .itemTag {
+        height: 28px;
+        margin-right: 0;
+        font-size: 14px;
+        line-height: 28px;
+        border-radius: 4px;
+        user-select: none;
+      }
+    }
+
+    :global {
+      .ant-table-cell {
+        height: 60px;
+      }
+    }
+  }
+}
