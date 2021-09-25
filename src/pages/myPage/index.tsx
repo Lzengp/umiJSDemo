@@ -1,3 +1,4 @@
+import CustomSelect from '@/components/CustomSelect';
 import DragDropTable from '@/components/DragDropTable';
 import EditableTable from '@/components/EditableTable';
 import PriorityConfig from '@/components/PriorityConfig';
@@ -19,6 +20,11 @@ function MyPage(props: MyPageProps) {
       <div className={styles.unit}>
         <div className={styles.priorityConfig}>
           <PriorityConfig />
+        </div>
+      </div>
+      <div className={styles.unit}>
+        <div className={styles.customSelect}>
+          <CustomSelect />
         </div>
       </div>
     </>
