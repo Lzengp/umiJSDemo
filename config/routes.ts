@@ -59,6 +59,12 @@
     component: './myPage',
   },
   {
+    name: 'myDndPage',
+    icon: 'smile',
+    path: '/MyDndPage',
+    component: './MyDndPage',
+  },
+  {
     component: './404',
   },
 ];

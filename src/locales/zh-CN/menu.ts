@@ -50,4 +50,5 @@ export default {
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
   'menu.mypage': '我的页面',
+  'menu.myDndPage': '我的看板',
 };
