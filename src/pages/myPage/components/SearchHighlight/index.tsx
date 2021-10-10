@@ -20,9 +20,10 @@ function SearchHighlight(props: SearchHighlightProps) {
   const onSearch = useCallback(
     (e) => {
       const value = e.target.value;
+      console.log(value);
       setSearchValue(value);
       if (value) {
-        const filterData = data.filter((item: any) => item.title.indexOf(value) > -1);
+        const filterData = initData.filter((item: any) => item.title.indexOf(value) > -1);
         setData(filterData);
       } else {
         setData(JSON.parse(JSON.stringify(initData)));
@@ -31,10 +32,12 @@ function SearchHighlight(props: SearchHighlightProps) {
     [data],
   );
 
+  console.log(data, initData)
+
   return (
     <div>
       <Input onChange={onSearch} style={{ width: 200 }} />
-      <ul>
+      <ul style={{ margin: '10px 0 0 -30px' }}>
         {data.map((item: { id: string; title: string }) => (
           <li key={item.id}>
             <div

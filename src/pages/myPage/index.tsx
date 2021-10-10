@@ -53,10 +53,12 @@ function MyPage(props: MyPageProps) {
         </div>
       </div>
       <div className={styles.unit}>
-        <SearchHighlight />
+        <div className={styles.customSelect}>
+          <SearchHighlight />
+        </div>
       </div>
       <div>
-        <Button onClick={clickModal}>添加</Button>
+        {/* <Button onClick={clickModal}>添加</Button> */}
       </div>
     </>
   );
