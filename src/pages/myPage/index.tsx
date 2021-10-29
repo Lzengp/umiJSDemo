@@ -7,6 +7,8 @@ import createFormModal from '@/util/createFormModal';
 import { ProFormText } from '@ant-design/pro-form';
 import { Button } from 'antd';
 import { useCallback } from 'react';
+import CssTest from './components/CssTest';
+import PositioningData from './components/PositioningData';
 import SearchHighlight from './components/SearchHighlight';
 import styles from './index.less';
 
@@ -15,51 +17,27 @@ interface MyPageProps {}
 function MyPage(props: MyPageProps) {
   const {} = props;
 
-  const clickModal = useCallback(() => {
-    createFormModal({
-      title: `弹窗`,
-      renderForm: () => (
-        <ProFormText
-          label="标题"
-          name="title"
-          placeholder="标题"
-          rules={requiredRule()}
-          fieldProps={{ autoFocus: true }}
-        />
-      ),
-      onOk: (values: any) => {
-        // addBlock(values);
-        console.log(values);
-      },
-    });
-  }, []);
+  const components = [
+    <PositioningData />,
+    <EditableTable />,
+    <DragDropTable />,
+    <div className={styles.priorityConfig}>
+      <PriorityConfig />
+    </div>,
+    <div className={styles.customSelect}>
+      <CustomSelect />
+    </div>,
+    <SearchHighlight />,
+    <CssTest />,
+  ];
 
   return (
     <>
-      <div className={styles.unit}>
-        <EditableTable />
-      </div>
-      <div className={styles.unit}>
-        <DragDropTable />
-      </div>
-      <div className={styles.unit}>
-        <div className={styles.priorityConfig}>
-          <PriorityConfig />
+      {components.map((item, index) => (
+        <div className={styles.unit} key={index}>
+          {item}
         </div>
-      </div>
-      <div className={styles.unit}>
-        <div className={styles.customSelect}>
-          <CustomSelect />
-        </div>
-      </div>
-      <div className={styles.unit}>
-        <div className={styles.customSelect}>
-          <SearchHighlight />
-        </div>
-      </div>
-      <div>
-        {/* <Button onClick={clickModal}>添加</Button> */}
-      </div>
+      ))}
     </>
   );
 }

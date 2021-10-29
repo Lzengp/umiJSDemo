@@ -44,7 +44,6 @@ function componentName(props: Props, ref: any) {
       if (flag === 'type') {
         const data = [...typeSelectList];
         data.forEach((item) => {
-          console.log(item.value, value);
           if (item.value === value) {
             item.isSelected = true;
           } else {

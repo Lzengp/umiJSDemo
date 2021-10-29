@@ -1,6 +1,7 @@
 import { brightenKeyWord } from '@/util';
 import { Input } from 'antd';
 import { useState, useCallback } from 'react';
+import styles from './index.less';
 
 interface SearchHighlightProps {}
 
@@ -20,7 +21,6 @@ function SearchHighlight(props: SearchHighlightProps) {
   const onSearch = useCallback(
     (e) => {
       const value = e.target.value;
-      console.log(value);
       setSearchValue(value);
       if (value) {
         const filterData = initData.filter((item: any) => item.title.indexOf(value) > -1);
@@ -32,10 +32,8 @@ function SearchHighlight(props: SearchHighlightProps) {
     [data],
   );
 
-  console.log(data, initData)
-
   return (
-    <div>
+    <div className={styles.wrap}>
       <Input onChange={onSearch} style={{ width: 200 }} />
       <ul style={{ margin: '10px 0 0 -30px' }}>
         {data.map((item: { id: string; title: string }) => (

@@ -1,0 +1,59 @@
+@focusColor: #1b9aee;
+
+.wrap {
+  padding: 20px;
+  
+  .treeWrap {
+    .title {
+      display: flex;
+      align-items: center;
+
+      .operationTree {
+        display: flex;
+        align-items: center;
+        opacity: 0;
+      }
+
+      &:hover {
+        .operationTree {
+          opacity: 1;
+        }
+      }
+    }
+
+    :global {
+      .anticon {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .topBar {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    border-bottom: 1px solid #f2f2f2;
+    transition: all 0.25s;
+
+    &:hover {
+      border-color: @focusColor;
+    }
+
+    .addIcon {
+      margin-right: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.25s;
+
+      &:hover {
+        color: @focusColor;
+      }
+    }
+
+    .input {
+      width: 100%;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { DragSortTable } from '@ant-design/pro-table';
-import Icon, { CloseCircleFilled, MenuOutlined } from '@ant-design/icons';
+import { CloseCircleFilled } from '@ant-design/icons';
 import { message } from 'antd';
 import styles from './index.less';
 
@@ -60,17 +60,9 @@ const DragDropTable = (props: DragDropTableProps) => {
   const {} = props;
   const [dataSource2, setDatasource2] = useState(data);
   const handleDragSortEnd2 = (newDataSource: any) => {
-    console.log('排序后的数据', newDataSource);
     setDatasource2(newDataSource);
     message.success('修改列表排序成功');
   };
-
-  // const dragHandleRender = (rowData: any, idx: any) => (
-  //   <>
-  //     <MenuOutlined style={{ cursor: 'grab', color: 'gold' }} />
-  //     &nbsp;{idx + 1} - {rowData.name}
-  //   </>
-  // );
 
   return (
     <div className={styles.content}>
@@ -82,7 +74,6 @@ const DragDropTable = (props: DragDropTableProps) => {
         pagination={false}
         dataSource={dataSource2}
         dragSortKey="sort"
-        // dragSortHandlerRender={dragHandleRender}
         onDragSortEnd={handleDragSortEnd2}
         options={false}
         showHeader={false}
