@@ -2,11 +2,8 @@ import CustomSelect from '@/components/CustomSelect';
 import DragDropTable from '@/components/DragDropTable';
 import EditableTable from '@/components/EditableTable';
 import PriorityConfig from '@/components/PriorityConfig';
-import { requiredRule } from '@/util';
-import createFormModal from '@/util/createFormModal';
-import { ProFormText } from '@ant-design/pro-form';
-import { Button } from 'antd';
-import { useCallback } from 'react';
+import { useHistory } from '@umijs/runtime/node_modules/@types/react-router';
+import { useLocation, useParams, useRouteMatch } from 'react-router';
 import CssTest from './components/CssTest';
 import PositioningData from './components/PositioningData';
 import SearchHighlight from './components/SearchHighlight';
@@ -30,6 +27,16 @@ function MyPage(props: MyPageProps) {
     <SearchHighlight />,
     <CssTest />,
   ];
+
+  const pro = new Promise((resolve,reject)=>{
+    console.log('执行');
+    resolve('resolve');
+  }).then((res:any) => {
+    return 'xxxxx';
+  });
+
+  console.log(pro)
+
 
   return (
     <>
