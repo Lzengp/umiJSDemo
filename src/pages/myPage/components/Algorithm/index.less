@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 20px;
+
+  .buttonColony {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    button {
+      margin-top: 20px;
+      overflow: hidden;
+
+      span {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    background-color: red;
+    background-image: linear-gradient(to right, red, yellow);
+  }
+}

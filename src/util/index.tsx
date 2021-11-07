@@ -43,11 +43,9 @@ export function brightenKeyWord(val: string, keyword: string) {
 }
 
 /**判断当前元素是否在视窗内 */
-export function isInViewPortOfOne(el: any) {
-  // viewPortHeight 兼容所有浏览器写法
-  const viewPortHeight =
-    window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-  const offsetTop = el.offsetTop;
-  const scrollTop = document.documentElement.scrollTop;
-  return offsetTop - scrollTop <= viewPortHeight;
+export function isElementVisible(el: any) {
+  const rect = el.getBoundingClientRect();
+  const vWidth = window.innerWidth || document.documentElement.clientWidth;
+  const vHeight = window.innerHeight || document.documentElement.clientHeight;
+  return !(rect.right < 0 || rect.bottom < 0 || rect.left > vWidth || rect.top > vHeight);
 }
