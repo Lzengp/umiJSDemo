@@ -1,7 +1,8 @@
 import { isElementVisible } from '@/util';
 import { Button, Input } from 'antd';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
+import Context from './context';
 
 interface Props {}
 
@@ -13,6 +14,7 @@ function Algorithm(props: Props) {
   const [flag, setFlag] = useState<any>(false); // 倒计时按钮点击判断
   const [reverseList, setReverseList] = useState<string>('1,2,3,4,5'); // 倒序输入框里面的值
   const [rollFlag, setRollFlag] = useState<boolean>(true); // 是否监听滚动事件
+  const [reverseValue, setReverseValue] = useState<string[]>([]);
 
   /**为了解决闭包问题，这个需要每次都重新调用，让countDown里面的num值是最新的，并且每次调用完成都要清空当前定时器 */
   useEffect(() => {
@@ -98,7 +100,7 @@ function Algorithm(props: Props) {
 
   /**滚动事件 */
   const scrollEvent = () => {
-    const el = document.getElementById('suanfa');
+    const el = document.getElementById('lianxiTitle');
     if (!rollFlag) return;
     if (isElementVisible(el)) {
       console.log('当前元素可见');
@@ -116,12 +118,13 @@ function Algorithm(props: Props) {
     for (let i = 0; i < arr.length; i += 1) {
       arrRev[arr.length - i - 1] = arr[i];
     }
+    setReverseValue(arrRev);
     console.log(arrRev);
   };
 
   return (
     <div className={styles.wrapper}>
-      <h1 id="suanfa">算法演练</h1>
+      <h1 id="lianxiTitle">练习</h1>
 
       <div className={styles.buttonColony}>
         <Button
@@ -149,6 +152,13 @@ function Algorithm(props: Props) {
             }}
           />
           <Button onClick={reverse}>倒序按钮</Button>
+          输出：{JSON.stringify(reverseValue)}
+        </div>
+        <div>
+          测试useContext
+          <Context.Provider value={{ id: '1', name: 'lw' }}>
+            <ContextComponentOne />
+          </Context.Provider>
         </div>
       </div>
     </div>
@@ -156,3 +166,30 @@ function Algorithm(props: Props) {
 }
 
 export default Algorithm;
+
+interface ContextComponentOneProps {}
+
+function ContextComponentOne(props: ContextComponentOneProps) {
+  const {} = props;
+  const context = useContext(Context);
+
+  return (
+    <div>
+      子组件: {context.id}, {context.name}
+      <ContextComponentTwo />
+    </div>
+  );
+}
+
+interface ContextComponentTwoProps {}
+
+function ContextComponentTwo(props: ContextComponentTwoProps) {
+  const {} = props;
+  const context = useContext(Context);
+
+  return (
+    <div>
+      子子组件: {context.id}, {context.name}
+    </div>
+  );
+}
