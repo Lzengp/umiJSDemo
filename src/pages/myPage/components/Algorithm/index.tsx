@@ -3,32 +3,41 @@ import { Button, Input } from 'antd';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
 import Context from './context';
+import { useDispatch, useSelector } from 'umi';
 
 interface Props {}
-
-let countDownTimer: any = null;
 
 function Algorithm(props: Props) {
   const {} = props;
   const [num, setNum] = useState<any>(20); // 倒计时值
-  const [flag, setFlag] = useState<any>(false); // 倒计时按钮点击判断
   const [reverseList, setReverseList] = useState<string>('1,2,3,4,5'); // 倒序输入框里面的值
   const [rollFlag, setRollFlag] = useState<boolean>(true); // 是否监听滚动事件
   const [reverseValue, setReverseValue] = useState<string[]>([]);
 
-  /**为了解决闭包问题，这个需要每次都重新调用，让countDown里面的num值是最新的，并且每次调用完成都要清空当前定时器 */
+  const dispatch = useDispatch();
+
+  const { algorithmObj } = useSelector(mapState);
+
+  console.log(algorithmObj);
+
   useEffect(() => {
-    if (num > 0 && flag) countDown();
-    return () => clearInterval(countDownTimer);
-  }, [num, flag]);
+    dispatch({
+      type: `algorithm/fetchAlgorithmObj`,
+      payload: { value: 'testValue', name: 'longwei' },
+    });
+  }, []);
 
   const countDown = useCallback(() => {
-    countDownTimer = setInterval(() => {
+    const countDownTimer = setInterval(() => {
       console.log(num);
-      setNum(num - 1);
-      if (num === 0) {
-        clearInterval(timer);
-      }
+      // 解决闭包问题, 但是此时从外层拿到的num还是存在闭包问题,也就是上面的打印的num还是初始值（20）
+      setNum((num: number) => {
+        console.log('setSTate里面的值', num);
+        if (num === 1) {
+          clearInterval(countDownTimer);
+        }
+        return num - 1;
+      });
     }, 1000);
   }, [num]);
 
@@ -109,7 +118,12 @@ function Algorithm(props: Props) {
     }
   };
 
-  window.addEventListener('scroll', scrollEvent, false);
+  useEffect(() => {
+    window.addEventListener('scroll', scrollEvent, false);
+    return () => {
+      window.removeEventListener('scroll', scrollEvent, false);
+    };
+  }, []);
 
   /**倒序 */
   const reverse = () => {
@@ -136,7 +150,7 @@ function Algorithm(props: Props) {
         </Button>
         <Button
           onClick={() => {
-            setFlag(true);
+            countDown();
           }}
         >
           倒计时 {num}
@@ -164,6 +178,10 @@ function Algorithm(props: Props) {
     </div>
   );
 }
+
+const mapState = (state: any) => ({
+  algorithmObj: state.algorithm.algorithmObj,
+});
 
 export default Algorithm;
 
