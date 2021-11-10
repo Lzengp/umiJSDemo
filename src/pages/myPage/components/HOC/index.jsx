@@ -5,7 +5,6 @@ import React, { Component, Fragment } from 'react';
 class Hello extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
     render() {
         return <h4>hello Jason</h4>

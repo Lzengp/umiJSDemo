@@ -19,8 +19,6 @@ function Algorithm(props: Props) {
     addCount: modal.addCount,
   }));
 
-  console.log(algorithmObj);
-
   useEffect(() => {
     dispatch({
       type: `algorithm/fetchAlgorithmObj`,
@@ -54,6 +52,7 @@ function Algorithm(props: Props) {
       console.log('防抖');
     };
     debounce(fn, 500);
+    console.log(algorithmObj);
   };
 
   /**节流按钮触发事件 */
@@ -163,6 +162,11 @@ function Algorithm(props: Props) {
             placeholder="格式：'1,2,3,4,5', 请用英文逗号"
             onChange={(val) => {
               setReverseList(val.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                reverse();
+              }
             }}
           />
           <Button onClick={reverse}>倒序按钮</Button>
