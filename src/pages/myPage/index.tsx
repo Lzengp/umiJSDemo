@@ -10,13 +10,12 @@ import styles from './index.less';
 
 interface MyPageProps {}
 
-
-
 function MyPage(props: MyPageProps) {
   const {} = props;
 
   const components = [
     <Algorithm />,
+    <CssTest />,
     <PositioningData />,
     <EditableTable />,
     <DragDropTable />,
@@ -27,7 +26,6 @@ function MyPage(props: MyPageProps) {
       <CustomSelect />
     </div>,
     <SearchHighlight />,
-    <CssTest />,
   ];
 
   return (

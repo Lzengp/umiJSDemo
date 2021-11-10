@@ -1,9 +1,14 @@
+import { useModel } from 'umi';
 import styles from './index.less';
 
 interface Props {}
 
 function CssTest(props: Props) {
   const {} = props;
+
+  const { count } = useModel('project', (modal) => ({
+    count: modal.count,
+  }));
 
   const testDataArray = [
     { value: '1', lable: '22' },
@@ -43,6 +48,7 @@ function CssTest(props: Props) {
 
   return (
     <div className={styles.cssWrap}>
+      <div style={{ margin: 20 }}>useModal全局状态测试：{count}</div>
       <div className={styles.top}></div>
       <div className={styles.center}></div>
       <div className={styles.right}></div>

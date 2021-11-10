@@ -3,8 +3,7 @@ import { Button, Input } from 'antd';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
 import Context from './context';
-import { useDispatch, useSelector } from 'umi';
-
+import { useDispatch, useModel, useSelector } from 'umi';
 interface Props {}
 
 function Algorithm(props: Props) {
@@ -19,6 +18,11 @@ function Algorithm(props: Props) {
   const { algorithmObj } = useSelector(mapState);
 
   console.log(algorithmObj);
+
+  const { count, addCount } = useModel('project', (modal) => ({
+    count: modal.count,
+    addCount: modal.addCount,
+  }));
 
   useEffect(() => {
     dispatch({
@@ -139,7 +143,6 @@ function Algorithm(props: Props) {
   return (
     <div className={styles.wrapper}>
       <h1 id="lianxiTitle">练习</h1>
-
       <div className={styles.buttonColony}>
         <Button
           onClick={() => {
@@ -158,7 +161,7 @@ function Algorithm(props: Props) {
         <Button onClick={debounceButton}>防抖按钮</Button>
         <Button onClick={throttleButton}>节流按钮</Button>
         <Button onClick={promiseFunc}>Promise按钮</Button>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', margin: '20px' }}>
           <Input
             placeholder="格式：'1,2,3,4,5', 请用英文逗号"
             onChange={(val) => {
@@ -168,12 +171,19 @@ function Algorithm(props: Props) {
           <Button onClick={reverse}>倒序按钮</Button>
           输出：{JSON.stringify(reverseValue)}
         </div>
-        <div>
+        <div style={{ margin: '20px' }}>
           测试useContext
           <Context.Provider value={{ id: '1', name: 'lw' }}>
             <ContextComponentOne />
           </Context.Provider>
         </div>
+        <Button
+          onClick={() => {
+            addCount(1);
+          }}
+        >
+          测试useModal：{count}
+        </Button>
       </div>
     </div>
   );
