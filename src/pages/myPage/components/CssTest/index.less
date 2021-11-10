@@ -1,25 +1,58 @@
 .cssWrap {
-    padding: 20px;
-    height: 400px;
-    .top {
-        width: 240px;
-        height: 60px;
-        background-color: #dddddd;
-        transform: skew(-45deg, 0deg) translate(30px, 0px);
-    }
+  height: 400px;
+  padding: 20px;
+  .top {
+    width: 240px;
+    height: 60px;
+    background-color: #dddddd;
+    transform: skew(-45deg, 0deg) translate(30px, 0px);
+  }
 
-    .center {
-        width: 240px;
-        height: 240px;
-        background-color: #aaaaaa;
-        float: left;
-    }
+  .center {
+    float: left;
+    width: 240px;
+    height: 240px;
+    background-color: #aaaaaa;
+  }
 
-    .right {
-        width: 60px;
-        height: 240px;
-        background-color: #888888;
-        float: left;
-        transform: skew(0deg, -45deg) translate(0px, -30px);
+  .right {
+    float: left;
+    width: 60px;
+    height: 240px;
+    background-color: #888888;
+    transform: skew(0deg, -45deg) translate(0px, -30px);
+  }
+
+  /** less循环 */
+  //当前主流的设备尺寸
+  @deviceList: 750px, 720px, 640px, 540px, 480px, 424px, 414px, 400px, 384px, 375px, 320px;
+
+  //设计稿的尺寸
+  @psdWidth: 750px;
+
+  //预设的基准值
+  @baseFontSize: 100px;
+
+  //设置数组的长度
+  @len:length (@deviceList);
+
+  .loopDomP(@index) when (@index > 0) {
+    // 根据index获取对应的某个值 extract(数组名, 对应的序号)
+    @media (max-width: extract(@deviceList, @index)) {
+      .lessLoop {
+        font-size: extract(@deviceList, @index) / @psdWidth* @baseFontSize;
+        background-color: red;
+      }
     }
+    .loopDomP(@index - 1);
+  }
+
+  .loopDomP(@len);
+
+  //   @media (min-width: extract(@deviceList, 1)) {
+  //     .lessLoop {
+  //       font-size: extract(@deviceList, 1) / @psdWidth* @baseFontSize;
+  //       background-color: red;
+  //     }
+  //   }
 }

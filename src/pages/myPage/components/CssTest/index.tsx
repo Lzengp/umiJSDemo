@@ -48,7 +48,11 @@ function CssTest(props: Props) {
 
   return (
     <div className={styles.cssWrap}>
-      <div style={{ margin: 20 }}>useModal全局状态测试：{count}</div>
+      <div style={{ margin: 20 }}>
+        <div>useModal全局状态测试：{count}</div>
+        <div className={styles.lessLoop}>测试less循环</div>
+      </div>
+
       <div className={styles.top}></div>
       <div className={styles.center}></div>
       <div className={styles.right}></div>

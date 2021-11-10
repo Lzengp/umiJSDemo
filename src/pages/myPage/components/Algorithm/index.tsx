@@ -1,5 +1,5 @@
 import { isElementVisible } from '@/util';
-import { Button, Input } from 'antd';
+import { Button, Col, Input, Row } from 'antd';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
 import Context from './context';
@@ -12,17 +12,14 @@ function Algorithm(props: Props) {
   const [reverseList, setReverseList] = useState<string>('1,2,3,4,5'); // 倒序输入框里面的值
   const [rollFlag, setRollFlag] = useState<boolean>(true); // 是否监听滚动事件
   const [reverseValue, setReverseValue] = useState<string[]>([]);
-
   const dispatch = useDispatch();
-
   const { algorithmObj } = useSelector(mapState);
-
-  console.log(algorithmObj);
-
   const { count, addCount } = useModel('project', (modal) => ({
     count: modal.count,
     addCount: modal.addCount,
   }));
+
+  console.log(algorithmObj);
 
   useEffect(() => {
     dispatch({
@@ -185,6 +182,11 @@ function Algorithm(props: Props) {
           测试useModal：{count}
         </Button>
       </div>
+      {/* <Row gutter={24}>
+        <Col span="8">xxx</Col>
+        <Col span="8">xxx</Col>
+        <Col span="8">xxx</Col>
+      </Row> */}
     </div>
   );
 }
