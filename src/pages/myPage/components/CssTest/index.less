@@ -55,4 +55,17 @@
   //       background-color: red;
   //     }
   //   }
+
+  .beforeAfter {
+    &::before {
+      margin-right: 20px;
+      background-color: red;
+      content: 'before';
+    }
+    &::after {
+      margin-left: 20px;
+      background-color: green;
+      content: 'after';
+    }
+  }
 }

@@ -53,6 +53,7 @@ function Algorithm(props: Props) {
     };
     debounce(fn, 500);
     console.log(algorithmObj);
+    console.log(eval('5 * 5'));
   };
 
   /**节流按钮触发事件 */
@@ -136,6 +137,67 @@ function Algorithm(props: Props) {
     console.log(arrRev);
   };
 
+  /**深拷贝 */
+  const deelClone = (obj: any) => {
+    if (!obj) return null;
+    let newObj = obj instanceof Array ? [] : {};
+    for (const i in obj) {
+      newObj[i] = typeof obj[i] === 'object' ? deelClone(obj[i]) : obj[i];
+    }
+    return newObj;
+  };
+
+  /**去重 */
+  const duplicateRemoval = () => {
+    const arr = [1, 2, 3, 4, 4, 4, 5, 5, 6];
+    const arrObj = [
+      { value: '1', lable: '22' },
+      { value: '2', lable: '33' },
+      { value: '2', lable: '33' },
+    ];
+    /**下面两种去重效果一样, 都只能去重简单的，比如arr那种 */
+    const setArr1 = [...new Set(arr)];
+    const setArr2 = Array.from(new Set(arr));
+    console.log(setArr1, setArr2);
+    let obj = {};
+    const a = arr.reduce((prev: any, cur: any) => {
+      obj[cur] ? '' : (obj[cur] = true && prev.push(cur));
+      return prev;
+    }, []);
+
+    // 简单数组去重
+    const b = arr.reduce((prev: any, cur: any) => (prev.includes(cur) ? prev : [...prev, cur]), []);
+
+    // 对象数组去重
+    const c = arrObj.reduce(
+      (prev: any, cur: any) =>
+        JSON.stringify(prev).includes(JSON.stringify(cur)) ? prev : [...prev, cur],
+      [],
+    );
+
+    console.log(a, b, c);
+  };
+
+  /**高阶函数： 一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数,map, reduce, sort */
+  const higherOrderFunction = () => {
+    function pow(x: number) {
+      return x * x;
+    }
+    const arr = [1, 2, 3];
+    const a = arr.map(pow);
+
+    // 数组求和
+    const b = arr.reduce(function (x, y) {
+      return x + y;
+    });
+
+    // 取2的倍数
+    const c = arr.filter(function (x) {
+      return x % 2 === 0;
+    });
+    console.log(a, b, c);
+  };
+
   return (
     <div className={styles.wrapper}>
       <h1 id="lianxiTitle">练习</h1>
@@ -185,12 +247,9 @@ function Algorithm(props: Props) {
         >
           测试useModal：{count}
         </Button>
+        <Button onClick={duplicateRemoval}>去重</Button>
+        <Button onClick={higherOrderFunction}>高阶函数</Button>
       </div>
-      {/* <Row gutter={24}>
-        <Col span="8">xxx</Col>
-        <Col span="8">xxx</Col>
-        <Col span="8">xxx</Col>
-      </Row> */}
     </div>
   );
 }
@@ -222,7 +281,7 @@ function ContextComponentTwo(props: ContextComponentTwoProps) {
   const context = useContext(Context);
 
   return (
-    <div>
+    <div className={styles.childrenComponent}>
       子子组件: {context.id}, {context.name}
     </div>
   );

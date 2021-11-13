@@ -10,47 +10,12 @@ function CssTest(props: Props) {
     count: modal.count,
   }));
 
-  const testDataArray = [
-    { value: '1', lable: '22' },
-    { value: '2', lable: '33' },
-  ];
-
-  const testDataObj = { value: '1', lable: '22', id: '11223333', name: '龙伟' };
-
-  const deelClone = (obj: any) => {
-    if (!obj) return null;
-    let newObj = obj instanceof Array ? [] : {};
-    for (const i in obj) {
-      newObj[i] = typeof obj[i] === 'object' ? deelClone(obj[i]) : obj[i];
-    }
-    return newObj;
-  };
-
-  /**去重 */
-  const duplicateRemoval = () => {
-    const arr = [1, 2, 3, 4, 4, 4, 5, 5, 6];
-    const arrObj = [
-      { value: '1', lable: '22' },
-      { value: '2', lable: '33' },
-      { value: '2', lable: '33' },
-    ];
-    /**下面两种去重效果一样, 都只能去重简单的，比如arr那种 */
-    const setArr1 = [...new Set(arr)];
-    const setArr2 = Array.from(new Set(arr));
-    console.log(setArr1, setArr2);
-    let obj = {};
-    arrObj.reduce((prev: any, cur: any) => {
-      obj[cur] ? '' : (obj[cur] = true && prev.push(cur));
-      return prev;
-    }, []);
-    arrObj.reduce((prev: any, cur: any) => (prev.includes(cur) ? prev : [...prev, cur]), []);
-  };
-
   return (
     <div className={styles.cssWrap}>
-      <div style={{ margin: 20 }}>
+      <div style={{ margin: 20, display: "flex", justifyContent: "space-between" }}>
         <div>useModal全局状态测试：{count}</div>
         <div className={styles.lessLoop}>测试less循环</div>
+        <div className={styles.beforeAfter}>测试伪元素before/after</div>
       </div>
 
       <div className={styles.top}></div>
