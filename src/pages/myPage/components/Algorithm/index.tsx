@@ -1,5 +1,5 @@
 import { isElementVisible } from '@/util';
-import { Button, Col, Input, Row } from 'antd';
+import { Button, Input } from 'antd';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
 import Context from './context';
@@ -124,7 +124,7 @@ function Algorithm(props: Props) {
     return () => {
       window.removeEventListener('scroll', scrollEvent, false);
     };
-  }, []);
+  }, [rollFlag]);
 
   /**倒序 */
   const reverse = () => {
@@ -198,10 +198,49 @@ function Algorithm(props: Props) {
     console.log(a, b, c);
   };
 
+  /**阶乘 */
+  const factorial = (num: number): number => {
+    if (num === 1) {
+      return 1;
+    }
+    return num * factorial(num - 1);
+  };
+
+  /**字符递增 */
+  const stringIncrementer = (strng: string) => {
+    // const arr = strng.split('');
+    // let letter = '';
+    // let number = '';
+    // arr.forEach((item) => {
+    //   if (Number(item) || Number(item) === 0) {
+    //     number += item;
+    //   } else {
+    //     letter += item;
+    //   }
+    // });
+    // console.log('letter:', letter, ',number:', number, Number(number) + 1);
+    // return letter + (Number(number) + 1).toString();
+    if (isNaN(parseInt(strng[strng.length - 1]))) {
+      return strng + '1';
+    }
+    return strng.replace(/(0*)([0-9]+$)/, function (match, p1, p2) {
+      console.log(match, p1, p2);
+      const num = parseInt(p2) + 1;
+      // 加1之后大于之前的长度，说明进一位了
+      return num.toString().length > p2.length ? p1.slice(0, -1) + num : p1 + num;
+    });
+  };
+
+  const testFn = () => {
+    // console.log(factorial(4));
+    console.log(stringIncrementer('foobar009'));
+  };
+
   return (
     <div className={styles.wrapper}>
       <h1 id="lianxiTitle">练习</h1>
       <div className={styles.buttonColony}>
+        <Button onClick={testFn}>测试</Button>
         <Button
           onClick={() => {
             setRollFlag(!rollFlag);
