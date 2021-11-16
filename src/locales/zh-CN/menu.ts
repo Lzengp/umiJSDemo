@@ -51,4 +51,5 @@ export default {
   'menu.editor.koni': '拓扑编辑器',
   'menu.mypage': '我的页面',
   'menu.myDndPage': '我的看板',
+  'menu.sulapage': 'sula页面',
 };

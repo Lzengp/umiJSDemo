@@ -65,6 +65,12 @@
     component: './MyDndPage',
   },
   {
+    name: 'sulapage',
+    icon: 'smile',
+    path: '/SulaPage',
+    component: './SulaPage',
+  },
+  {
     component: './404',
   },
 ];
