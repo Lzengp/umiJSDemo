@@ -4,9 +4,9 @@ interface Props {}
 
 function componentName(props: Props) {
   const config = {
-    initialValues: {
-      hideParam: '隐藏的',
-    },
+    // initialValues: {
+    //   hideParam: '隐藏的',
+    // },
     fields: [
       {
         name: 'name',
