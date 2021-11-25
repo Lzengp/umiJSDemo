@@ -1,6 +1,24 @@
 .cssWrap {
-  height: 400px;
+  height: 500px;
   padding: 20px;
+
+  .myTransfrom {
+    width: 100px;
+    height: 100px;
+    transform: rotate(45deg); // transform会导致子元素的fixed失效
+    background-color: yellow;
+    margin-bottom: 50px;
+
+    .myFixed {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
   .top {
     width: 240px;
     height: 60px;
