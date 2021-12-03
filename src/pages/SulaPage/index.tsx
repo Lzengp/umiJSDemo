@@ -1,9 +1,10 @@
 import SulaForm from '@/components/SulaForm';
 import { Form } from 'sula';
+import styles from './index.less';
 
 interface Props {}
 
-function componentName(props: Props) {
+function SulaPage(props: Props) {
   const config = {
     // initialValues: {
     //   hideParam: '隐藏的',
@@ -47,6 +48,43 @@ function componentName(props: Props) {
         },
         rules: [{ required: true, message: '请输入地址' }],
       },
+      {
+        name: 'deposit',
+        label: '定金',
+        initialSource: [
+          { text: '收定金', value: 10 },
+          { text: '付定金', value: 20 },
+          { text: '无定金', value: 30 },
+        ],
+        field: {
+          type: 'select',
+          props: {
+            placeholder: '请选择定金',
+          },
+        },
+        rules: [{ required: true, message: '请选择定金' }],
+      },
+      {
+        name: 'depositInfo',
+        label: '定金金额及条款',
+        initialVisible: false,
+        field: {
+          type: 'textarea',
+          props: {
+            placeholder: '请输入定金金额及条款',
+            rows: 4,
+          },
+        },
+        dependency: {
+          visible: {
+            relates: ['deposit'],
+            inputs: [[10, 20]],
+            output: true,
+            defaultOutput: false,
+          }
+        },
+        rules: [{ required: true, message: '请输入定金金额及条款' }],
+      },
     ],
     actionsRender: [
       {
@@ -71,10 +109,11 @@ function componentName(props: Props) {
   };
 
   return (
-    <div style={{ backgroundColor: '#FFF' }}>
-      <SulaForm {...config} />
+    <div className={styles.sulaWrap}>
+      <Form {...config} />
+      {/* <SulaForm {...config} /> */}
     </div>
   );
 }
 
-export default componentName;
+export default SulaPage;
