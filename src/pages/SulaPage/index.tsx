@@ -9,29 +9,6 @@ function componentName(props: Props) {
     //   hideParam: '隐藏的',
     // },
     fields: [
-      // {
-      //   name: 'regulationCar',
-      //   label: '监管类型',
-      //   itemLayout: {
-      //     span: 6,
-      //   },
-      //   initialSource: [
-      //     {
-      //       text: '是',
-      //       value: true,
-      //     },
-      //     {
-      //       text: '否',
-      //       value: false,
-      //     },
-      //   ],
-      //   field: {
-      //     type: 'bs-select',
-      //     props: {
-      //       placeholder: '请输入',
-      //     },
-      //   },
-      // },
       {
         name: 'namessss',
         label: '姓名',
@@ -95,7 +72,6 @@ function componentName(props: Props) {
 
   return (
     <div style={{ backgroundColor: '#FFF' }}>
-      {/* <Form {...config} /> */}
       <SulaForm {...config} />
     </div>
   );

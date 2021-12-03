@@ -7,6 +7,22 @@ import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 
+
+import { registerFieldPlugins, registerRenderPlugins, registerActionPlugins, registerFilterPlugins, Icon } from 'sula';
+// import 'antd/dist/antd.css'; // 引入antd主题
+// import { UserOutlined } from '@ant-design/icons';
+
+// 注册插件
+registerFieldPlugins();
+registerRenderPlugins();
+registerActionPlugins();
+registerFilterPlugins();
+
+// 注册icon
+// Icon.iconRegister({
+//   user: UserOutlined
+// })
+
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
