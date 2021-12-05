@@ -10,7 +10,7 @@ function Algorithm(props: Props) {
   const {} = props;
   const [num, setNum] = useState<any>(20); // 倒计时值
   const [reverseList, setReverseList] = useState<string>('1,2,3,4,5'); // 倒序输入框里面的值
-  const [rollFlag, setRollFlag] = useState<boolean>(true); // 是否监听滚动事件
+  const [rollFlag, setRollFlag] = useState<boolean>(false); // 是否监听滚动事件
   const [reverseValue, setReverseValue] = useState<string[]>([]);
   const dispatch = useDispatch();
   const { algorithmObj } = useSelector(mapState);

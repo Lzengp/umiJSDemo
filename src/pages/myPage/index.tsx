@@ -5,6 +5,7 @@ import PriorityConfig from '@/components/PriorityConfig';
 import Algorithm from './components/Algorithm';
 import CssTest from './components/CssTest';
 import HOC from './components/HOC';
+import MyTestTree from './components/MyTestTree';
 import PositioningData from './components/PositioningData';
 import SearchHighlight from './components/SearchHighlight';
 import styles from './index.less';
@@ -28,6 +29,7 @@ function MyPage(props: MyPageProps) {
     </div>,
     <SearchHighlight />,
     <HOC />,
+    <MyTestTree />,
   ];
 
   return (
