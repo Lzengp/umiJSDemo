@@ -16,11 +16,11 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   const components = [
-    <Algorithm />,
     <CssTest />,
     <PositioningData />,
     <EditableTable />,
     <DragDropTable />,
+    <Algorithm />,
     <div className={styles.priorityConfig}>
       <PriorityConfig />
     </div>,

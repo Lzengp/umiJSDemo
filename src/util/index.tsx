@@ -47,5 +47,13 @@ export function isElementVisible(el: any) {
   const rect = el.getBoundingClientRect();
   const vWidth = window.innerWidth || document.documentElement.clientWidth;
   const vHeight = window.innerHeight || document.documentElement.clientHeight;
-  return !(rect.right < 0 || rect.bottom < 0 || rect.left > vWidth || rect.top > vHeight);
+
+  return !(
+    rect.right < 0 ||
+    rect.bottom < 0 ||
+    rect.left > vWidth ||
+    rect.top > vHeight ||
+    rect.top - 48 < 0 || // 当元素上面部分开始遮挡的时候
+    rect.bottom > vHeight // 当元素下面部门开始遮挡的时候
+  );
 }

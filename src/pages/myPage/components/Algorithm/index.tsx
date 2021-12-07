@@ -18,6 +18,9 @@ function Algorithm(props: Props) {
     count: modal.count,
     addCount: modal.addCount,
   }));
+  const [positionFixedTop, setPositionFixedTop] = useState<boolean>(false); // 在窗口上面出现
+  const [positionFixedBottom, setPositionFixedBottom] = useState<boolean>(false); // 在窗口下面出现
+
 
   useEffect(() => {
     dispatch({
@@ -111,12 +114,32 @@ function Algorithm(props: Props) {
   /**滚动事件 */
   const scrollEvent = () => {
     const el = document.getElementById('lianxiTitle');
+
+      // 需要判断当前元素是在窗口上面消失还是在窗口下面消失
+      const rect = el?.getBoundingClientRect() || { top: 0, bottom: 0 };
+      const vHeight = window.innerHeight || document.documentElement.clientHeight;
+      // 在窗口上面消失
+      if ( rect.top - 48 < 0 ) {
+        setPositionFixedTop(true);
+      } else {
+        setPositionFixedTop(false);
+      }
+
+      // 在窗口下面消失
+      if(rect.bottom > vHeight) {
+        setPositionFixedBottom(true);
+      } else {
+        setPositionFixedBottom(false);
+      }
+
+
     if (!rollFlag) return;
     if (isElementVisible(el)) {
       console.log('当前元素可见');
     } else {
       console.log('当前元素不可见');
     }
+  
   };
 
   useEffect(() => {
@@ -238,7 +261,19 @@ function Algorithm(props: Props) {
 
   return (
     <div className={styles.wrapper}>
-      <h1 id="lianxiTitle">练习</h1>
+      <h1
+        id="lianxiTitleFixedTop"
+        style={{ position: 'fixed', top: 45, display: positionFixedTop ? 'initial' : 'none', zIndex: 1 }}
+      >
+        练习
+      </h1>
+      <h1
+        id="lianxiTitleFixedBottom"
+        style={{ position: 'fixed', bottom: 0, display: positionFixedBottom ? 'initial' : 'none', zIndex: 1 }}
+      >
+        练习
+      </h1>
+      <h1 id="lianxiTitle" style={{  opacity: !positionFixedBottom || !positionFixedTop ? 1 : 0 }}>练习</h1>
       <div className={styles.buttonColony}>
         <Button onClick={testFn}>测试</Button>
         <Button
