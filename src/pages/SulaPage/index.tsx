@@ -1,5 +1,7 @@
 import SulaForm from '@/components/SulaForm';
+import { useEffect } from 'react';
 import { Form } from 'sula';
+import SulaTable from './components/SulaTable';
 import styles from './index.less';
 
 interface Props {}
@@ -81,7 +83,7 @@ function SulaPage(props: Props) {
             inputs: [[10, 20]],
             output: true,
             defaultOutput: false,
-          }
+          },
         },
         rules: [{ required: true, message: '请输入定金金额及条款' }],
       },
@@ -108,10 +110,68 @@ function SulaPage(props: Props) {
     ],
   };
 
+  /**自己创建的dom节点位置固定，就是之前分页的位置，这样只要监听新节点的位置，就知道分页样式什么时候是fixed布局什么时候是正常的布局
+   * fixed布局：当新dom节点消失在视窗的时候
+   * 正常布局（initial）：当新dom节点出现在视窗的时候
+   */
+  const listenerDom = () => {
+    const position = document.querySelector('.myDiv')?.getBoundingClientRect() || { bottom: 0 }; // 当前元素的位置
+    const vHeight = window.innerHeight || document.documentElement.clientHeight; // 视窗
+    console.log(position);
+    const antdPagination = document.querySelector('.ant-pagination');
+    if (position.bottom > vHeight || position.bottom === vHeight) {
+      console.log('消失了');
+      if (antdPagination) {
+        antdPagination.style.position = 'fixed';
+        antdPagination.style.bottom = '-16px';
+        antdPagination.style.width = 'calc(100% - 288px)';
+        antdPagination.style.background = '#FFF';
+        antdPagination.style.height = '64px';
+        antdPagination.style.display = 'flex';
+        antdPagination.style.alignItems = 'center';
+        antdPagination.style.justifyContent = 'flex-end';
+        antdPagination.style.zIndex = '10';
+      }
+    }
+    if (position.bottom < vHeight) {
+      if (antdPagination) {
+        antdPagination.style.position = 'initial';
+        antdPagination.style.display = 'flex';
+        antdPagination.style.justifyContent = 'flex-end';
+        antdPagination.style.width = '100%';
+        antdPagination.style.zIndex = '10';
+      }
+    }
+  };
+
+  /**监听创建的dom节点位置 */
+  useEffect(() => {
+    createEle();
+    window.addEventListener('scroll', listenerDom, false);
+    return () => {
+      window.removeEventListener('scroll', listenerDom, false);
+    };
+  }, []);
+
+  /**创建一个dom节点，作为一个判断依据 */
+  const createEle = () => {
+    if (!document.querySelector('.myDiv')) {
+      const el = document.createElement('div');
+      el.id = 'myDiv';
+      el.className = 'myDiv';
+      // el.innerText = '我的div';
+      // el.style.background = 'red';
+      // el.style.height = '30px';
+      document.querySelector('.ant-spin-container')?.appendChild(el);
+    }
+  };
+
   return (
     <div className={styles.sulaWrap}>
       <Form {...config} />
+      <div style={{ borderTop: '20px solid #f0f2f5' }} />
       {/* <SulaForm {...config} /> */}
+      <SulaTable />
     </div>
   );
 }
