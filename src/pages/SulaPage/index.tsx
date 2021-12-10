@@ -115,13 +115,25 @@ function SulaPage(props: Props) {
    * 正常布局（initial）：当新dom节点出现在视窗的时候
    */
   const listenerDom = () => {
-    const position = document.querySelector('.myDiv')?.getBoundingClientRect() || { bottom: 0 }; // 当前元素的位置
+    /**这种是使用自己创建的元素来作为参考定位 */
+    // const position = document.querySelector('.myDiv')?.getBoundingClientRect() || { bottom: 0 }; // 当前元素的位置
+
+    /**这种是使用ant-table-body来作为参考定位, 只要tableBody的bottom + 分页高度一半就要fixed布局
+     * 并且分页是不能超出表头的，所以tableBody的top + 200px就又要隐藏分页（恢复initial布局）
+     */
+    const tableBody = document.querySelector('.ant-table-tbody')?.getBoundingClientRect() || {
+      bottom: 0,
+      top: 0,
+    };
+
     const vHeight = window.innerHeight || document.documentElement.clientHeight; // 视窗
-    console.log(position);
-    const antdPagination = document.querySelector('.ant-pagination');
-    if (position.bottom > vHeight || position.bottom === vHeight) {
-      console.log('消失了');
-      if (antdPagination) {
+    const antdPagination = document.querySelector('.ant-pagination'); // 实际分页dom
+
+    // if (antdPagination && (position.bottom > vHeight || position.bottom === vHeight)) {
+    
+    /**设置分页悬浮（添加fixed布局） */
+    if (antdPagination) {
+      if (tableBody.bottom + 64 >= vHeight && tableBody.top + 100 <= vHeight) {
         antdPagination.style.position = 'fixed';
         antdPagination.style.bottom = '-16px';
         antdPagination.style.width = 'calc(100% - 288px)';
@@ -131,16 +143,25 @@ function SulaPage(props: Props) {
         antdPagination.style.alignItems = 'center';
         antdPagination.style.justifyContent = 'flex-end';
         antdPagination.style.zIndex = '10';
-      }
-    }
-    if (position.bottom < vHeight) {
-      if (antdPagination) {
+      } else {
+        // if (antdPagination && position.bottom < vHeight) {
         antdPagination.style.position = 'initial';
         antdPagination.style.display = 'flex';
         antdPagination.style.justifyContent = 'flex-end';
         antdPagination.style.width = '100%';
         antdPagination.style.zIndex = '10';
       }
+    }
+
+    /**设置表头悬浮（表头添加fixed布局） */
+    const tableTitle = document.querySelector('.ant-table-thead'); // 获取表头dom
+    if (tableTitle) {
+      if (tableBody.top - 75 <= 0) {
+        
+      } else {
+
+      }
+
     }
   };
 
