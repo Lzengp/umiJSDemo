@@ -8,9 +8,9 @@ interface Props {}
 
 function SulaPage(props: Props) {
   const config = {
-    // initialValues: {
-    //   hideParam: '隐藏的',
-    // },
+    initialValues: {
+      hideParam: '隐藏的',
+    },
     fields: [
       {
         name: 'namessss',
@@ -154,12 +154,14 @@ function SulaPage(props: Props) {
     }
 
     /**设置表头悬浮（表头添加fixed布局） */
-    const tableTitle = document.querySelector('.ant-table-thead'); // 获取表头dom
+    const tableTitle = document.querySelector('.ant-table-thead1'); // 获取表头dom
     if (tableTitle) {
-      if (tableBody.top - 75 <= 0) {
-        
+      if (tableBody.top - 75 <= 0) { // 在fixed布局中，不考虑表头和tablebody.bottom同水平的需要正常展示表头
+        tableTitle.style.position = 'fixed';
+        tableTitle.style.top = '45px';
+        tableTitle.style.zIndex = '10';
       } else {
-
+        tableTitle.style.position = 'initial';
       }
 
     }
@@ -167,7 +169,7 @@ function SulaPage(props: Props) {
 
   /**监听创建的dom节点位置 */
   useEffect(() => {
-    createEle();
+    // createEle();
     window.addEventListener('scroll', listenerDom, false);
     return () => {
       window.removeEventListener('scroll', listenerDom, false);

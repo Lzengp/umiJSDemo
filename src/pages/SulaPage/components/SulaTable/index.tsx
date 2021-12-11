@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryTable } from 'sula';
 
-const queryFields = Array(10)
+const queryFields = Array(9)
   .fill(0)
   .map((_, index) => {
     return {
@@ -36,10 +36,10 @@ export const remoteDataSource = {
 };
 
 export const columns = [
-//   {
-//     title: '序号',
-//     key: 'index',
-//   },
+    {
+      title: '序号',
+      key: 'index',
+    },
   {
     title: '国家',
     key: 'nat',
@@ -61,10 +61,8 @@ export const columns = [
     title: '操作',
     key: 'operation',
     render: (ctx) => {
-        return (
-            <a>xx</a>
-        )
-    }
+      return <a>xx</a>;
+    },
     // render: [
     //   {
     //     confirm: '是否删除？',
@@ -122,9 +120,8 @@ const actions = [
             return {
               ...ctx.params,
               uuids,
-            }
-
-          }
+            };
+          },
         },
       },
       (ctx) => {
@@ -137,28 +134,28 @@ const actions = [
 ];
 
 export default function BasicDemo() {
-
   const config = {
-    visibleFieldsCount:3,
-    layout: "vertical",
+    visibleFieldsCount: 3,
+    // layout: "vertical",
+    itemLayout: { span: 6 },
     columns: columns,
     remoteDataSource: remoteDataSource,
-    fields: queryFields,
-    rowKey: "id",
-    actionsRender: [ ...actions],
+    fields: [...queryFields],
+    rowKey: 'id',
+    actionsRender: [...actions],
     rowSelection: {
-        selectedRowKeys: [],
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(selectedRowKeys, selectedRows);
-        }
-    }
-  }
-  
-    return (
-      <div>
-        <div style={{ padding: 16, marginTop: 16 }}>
-          <QueryTable {...config}/>
-        </div>
+      selectedRowKeys: [],
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(selectedRowKeys, selectedRows);
+      },
+    },
+  };
+
+  return (
+    <div>
+      <div style={{ padding: 16, marginTop: 16 }}>
+        <QueryTable {...config} />
       </div>
-    );
+    </div>
+  );
 }
