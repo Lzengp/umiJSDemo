@@ -2,20 +2,102 @@
   height: 500px;
   padding: 20px;
 
+  .mySelector {
+    display: flex;
+
+    /**
+    * 当在父类内部写选择器的时候， 如果有多种子类，那么他们选中的顺序是按照父类的排序位置来的，而不是单独的子类在父类中的位置
+    */
+
+    /**偶数样式*/
+    .mySelectorItemEven {
+      width: 30px;
+      margin: 20px;
+      text-align: center;
+
+      /** & 符号表示当前元素mySelectorItem */
+      /** 当前元素（mySelectorItem） 在（mySelector）中的位置倒数第一位 此情况生效*/
+      // &:nth-last-child(4) {
+      //   background-color: green;
+      // }
+
+      /** 选择每个p元素是其父级的第一个p元素， 此情况生效*/
+      // &:first-of-type {
+      //   background-color: green;
+      // }
+
+      /** 选择每个p元素是其父级的最后一个p元素： 此情况不生效*/
+      // &:last-of-type {
+      //   background-color: green;
+      // }
+
+      /** 	选择每个p元素是其父级的唯一p元素 此情况不生效*/
+      // &:only-of-type {
+      //   background-color: green;
+      // }
+
+      /** 选择每个p元素是其父级的唯一子元素 此情况不生效*/
+      // &:only-child {
+      //   background-color: green;
+      // }
+
+      /** 选择每个p元素是其父级的第四个子元素 此情况生效， 但是如果选择的是奇数个数
+      比如第三个，此时由于在父类中，第三个是其他子类，那么不生效了*/
+      // &:nth-child(3) {
+      //   background-color: green;
+      // }
+      &:nth-of-type(3) {
+        background-color: green;
+      }
+    }
+
+    /**奇数样式*/
+    .mySelectorItemOdd {
+      width: 30px;
+      margin: 20px;
+      text-align: center;
+
+      /** 此情况生效*/
+      //  &:nth-last-child(1) {
+      //   background-color: red;
+      // }
+
+      /** 此情况不生效*/
+      // &:first-of-type {
+      //   background-color: red;
+      // }
+
+      /** 此情况生效*/
+      // &:last-of-type {
+      //   background-color: red;
+      // }
+
+      /** 此情况不生效*/
+      // &:only-child {
+      //   background-color: red;
+      // }
+
+      /** 此情况生效*/
+      // &:nth-child(2) {
+      //   background-color: red;
+      // }
+    }
+  }
+
   .myTransfrom {
     width: 100px;
     height: 100px;
-    transform: rotate(45deg); // transform会导致子元素的fixed失效
-    background-color: yellow;
     margin-bottom: 50px;
+    background-color: yellow;
+    transform: rotate(45deg); // transform会导致子元素的fixed失效
 
     .myFixed {
-      width: 50px;
-      height: 50px;
-      background-color: red;
       position: fixed;
       top: 50%;
       left: 50%;
+      width: 50px;
+      height: 50px;
+      background-color: red;
     }
   }
 
