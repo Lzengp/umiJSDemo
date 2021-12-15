@@ -9,6 +9,15 @@ import routes from './routes';
 const CompressionPlugin = require('compression-webpack-plugin');
 const { REACT_APP_ENV } = process.env;
 
+function slash(path: string) {
+  const isExtendedLengthPath = /^\\\\\?\\/.test(path);
+  const hasNonAscii = /[^\u0000-\u0080]+/.test(path); // eslint-disable-line no-control-regex
+  if (isExtendedLengthPath || hasNonAscii) {
+    return path;
+  }
+  return path.replace(/\\/g, '/');
+}
+
 // 在config文件目录下的config.js,
 // chainWebpack: webpackPlugin,这样配置webpack就🆗,
 
@@ -129,7 +138,6 @@ const webpackPlugin = (config) => {
     })
   );
   }
-};
 
 export default defineConfig({
   hash: true,
@@ -192,5 +200,29 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
-  chainWebpack: webpackPlugin,
+  // chainWebpack: webpackPlugin,
+  cssLoader: {
+    modules: {
+      // CSS Modules 模式 定义前缀作用域
+      getLocalIdent: (context: any, localIdentName: any, localName: any) => {
+        if (
+          context.resourcePath.includes('node_modules') ||
+          context.resourcePath.includes('ant.design.pro.less') ||
+          context.resourcePath.includes('global.less')
+        ) {
+          return localName;
+        }
+        const match = context.resourcePath.match(/src(.*)/);
+        if (match && match[1]) {
+          const antdProPath = match[1].replace('.less', '');
+          const arr = slash(antdProPath)
+            .split('/')
+            .map((a) => a.replace(/([A-Z])/g, '-$1'))
+            .map((a) => a.toLowerCase());
+          return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
+        }
+        return localName;
+      },
+    },
+  },
 });
