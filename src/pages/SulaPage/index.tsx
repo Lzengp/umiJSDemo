@@ -189,9 +189,15 @@ function SulaPage(props: Props) {
     }
   };
 
+  console.log('aaaaaaaaaaaaaaaaaa')
+
   return (
     <div className={styles.sulaWrap}>
       <Form {...config} />
+      <div className={styles.sulaTableTest}>
+        测试
+        <div className={styles.qiantaoStyle}>样式</div>  
+      </div>
       <div style={{ borderTop: '20px solid #f0f2f5' }} />
       {/* <SulaForm {...config} /> */}
       <SulaTable />
