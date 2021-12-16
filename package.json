@@ -87,6 +87,7 @@
     "@umijs/preset-dumi": "^1.1.7",
     "@umijs/preset-react": "^1.8.17",
     "@umijs/yorkie": "^2.0.3",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "carlo": "^0.9.46",
     "compression-webpack-plugin": "^9.1.2",
     "cross-env": "^7.0.0",
