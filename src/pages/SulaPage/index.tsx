@@ -1,4 +1,5 @@
 import SulaForm from '@/components/SulaForm';
+import { ProFormInstance } from '@ant-design/pro-form';
 import { useEffect } from 'react';
 import { Form } from 'sula';
 import SulaTable from './components/SulaTable';
@@ -9,11 +10,14 @@ interface Props {}
 function SulaPage(props: Props) {
   const config = {
     initialValues: {
-      hideParam: '隐藏的',
+      // hideParam: '隐藏的',
+      name: '龙伟',
+      ages: '',
+      address: '湖南衡阳',
     },
     fields: [
       {
-        name: 'namessss',
+        name: 'name',
         label: '姓名',
         field: {
           type: 'input',
@@ -34,6 +38,20 @@ function SulaPage(props: Props) {
             min: 1,
             style: {
               width: '100%',
+            },
+          },
+        },
+        /**
+         * 控制显隐
+         * 需求：当当前字段为空的时候，不展示此字段
+         */
+        dependency: {
+          visible: {
+            relates: ['ages'],
+            type: (ctx: any) => {
+              if (!ctx.values[0]) {
+                ctx.form.setFieldVisible(ctx.name, false);
+              } 
             },
           },
         },
@@ -87,6 +105,35 @@ function SulaPage(props: Props) {
         },
         rules: [{ required: true, message: '请输入定金金额及条款' }],
       },
+      {
+        name: 'fruits',
+        lable: '水果',
+        initialSource: [
+          {
+            text: '苹果 🍎',
+            value: 'apple',
+          },
+          {
+            text: '桃子 🍑',
+            value: 'peach',
+          },
+          {
+            text: '西瓜 🍉',
+            value: 'watermelon',
+            disabled: true,
+          },
+        ],
+        // initialValue: ['peach'],
+        field: {
+          type: 'checkboxgroup',
+          props: {
+            onChange: (e) => { console.log(e)}
+
+            // styles: { margin: '0 50px' }
+          }
+        },
+        rules: [{ required: true, message: '水果' }],
+      }
     ],
     actionsRender: [
       {
@@ -105,7 +152,22 @@ function SulaPage(props: Props) {
               ...result,
             }),
           },
+     
         ],
+        
+      },
+      {
+        type: 'button',
+        props: {
+          children: '取消',
+        },
+        visible: ({ form }: { form: ProFormInstance}) => {
+          console.log('xxxxxx', form, form.getFieldValue('ages'))
+        },
+        // action: [
+          
+        // ]
+       
       },
     ],
   };
@@ -127,7 +189,7 @@ function SulaPage(props: Props) {
     };
 
     const vHeight = window.innerHeight || document.documentElement.clientHeight; // 视窗
-    const antdPagination = document.querySelector('.ant-pagination'); // 实际分页dom
+    const antdPagination: any = document.querySelector('.ant-pagination'); // 实际分页dom
 
     // if (antdPagination && (position.bottom > vHeight || position.bottom === vHeight)) {
     
@@ -154,7 +216,7 @@ function SulaPage(props: Props) {
     }
 
     /**设置表头悬浮（表头添加fixed布局） */
-    const tableTitle = document.querySelector('.ant-table-thead1'); // 获取表头dom
+    const tableTitle: any = document.querySelector('.ant-table-thead1'); // 获取表头dom
     if (tableTitle) {
       if (tableBody.top - 75 <= 0) { // 在fixed布局中，不考虑表头和tablebody.bottom同水平的需要正常展示表头
         tableTitle.style.position = 'fixed';
@@ -193,7 +255,7 @@ function SulaPage(props: Props) {
 
   return (
     <div className={styles.sulaWrap}>
-      <Form {...config} />
+      <Form {...config} className={styles.sulaFormWrap}/>
       <div className={styles.sulaTableTest}>
         测试
         <div className={styles.qiantaoStyle}>样式</div>  
