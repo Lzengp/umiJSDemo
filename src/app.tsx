@@ -6,9 +6,13 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
-
-
-import { registerFieldPlugins, registerRenderPlugins, registerActionPlugins, registerFilterPlugins, Icon } from 'sula';
+import {
+  registerFieldPlugins,
+  registerRenderPlugins,
+  registerActionPlugins,
+  registerFilterPlugins,
+} from 'sula';
+import './SulaPlugin';
 // import 'antd/dist/antd.css'; // 引入antd主题
 // import { UserOutlined } from '@ant-design/icons';
 

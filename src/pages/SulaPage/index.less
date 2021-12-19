@@ -1,31 +1,35 @@
 .sulaWrap {
-    display: flex;
-    // justify-content: center;
-    flex-direction: column;
-    background-color: #fff;
-    height: 100%;
-    padding-top: 50px;
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 50px;
+  background-color: #fff;
 
-    .sulaFormWrap {
-      padding: 0 0 20px 0;
+  .sulaFormWrap {
+    padding: 0 0 20px 0;
+  }
+
+  .sulaTableTest {
+    display: none;
+    width: 100%;
+    height: 30px;
+    background-color: red;
+
+    .qiantaoStyle {
+      width: 50%;
+      height: 50%;
+      background-color: yellow;
+    }
+  }
+
+  :global {
+    .ant-table-selection-column {
+      z-index: 1;
     }
 
-    .sulaTableTest {
-      display: none;
-      background-color: red;
-      height: 30px;
-      width: 100%;
-
-      .qiantaoStyle {
-        background-color: yellow;
-        width: 50%;
-        height: 50%;
-      }
+    .ant-form-item-explain-error {
+      color: red;
     }
-
-    :global {
-        .ant-table-selection-column {
-          z-index: 1;
-        }
-      }
+  }
 }

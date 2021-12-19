@@ -107,7 +107,7 @@ function SulaPage(props: Props) {
       },
       {
         name: 'fruits',
-        lable: '水果',
+        label: '水果',
         initialSource: [
           {
             text: '苹果 🍎',
@@ -132,7 +132,7 @@ function SulaPage(props: Props) {
             // styles: { margin: '0 50px' }
           }
         },
-        rules: [{ required: true, message: '水果' }],
+        rules: [{ required: true, message: '请选择水果' }],
       }
     ],
     actionsRender: [
@@ -250,8 +250,6 @@ function SulaPage(props: Props) {
       document.querySelector('.ant-spin-container')?.appendChild(el);
     }
   };
-
-  console.log('aaaaaaaaaaaaaaaaaa')
 
   return (
     <div className={styles.sulaWrap}>
