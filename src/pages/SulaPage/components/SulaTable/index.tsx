@@ -161,7 +161,7 @@ export default function BasicDemo() {
   ];
 
   const config = {
-    visibleFieldsCount: 3,
+    visibleFieldsCount: 1000,
     // layout: "vertical",
     itemLayout: { span: 6 },
     columns: columns,
@@ -207,7 +207,7 @@ export default function BasicDemo() {
             onKeyDown: (e) => {
               if (e.keyCode === 13) {
                 // 键盘的Enter按键编码
-                tableProps.setFilters({ inputEnter: e.target.value }); 
+                tableProps.setFilters({ inputEnter: e.target.value });
                 tableProps?.refreshTable();
               }
             },
@@ -217,7 +217,7 @@ export default function BasicDemo() {
       // 需求：写一个插件，可以实现输入enter键就可以进行查询，先实现常用的表单输入框（input、selet、data、checked）
       {
         name: 'inputCutomerPlug',
-        label: '键盘事件',
+        label: '输入事件',
         field: {
           type: 'inputEnterField',
           props: {
@@ -225,7 +225,22 @@ export default function BasicDemo() {
           },
         },
       },
-      ...queryFields,
+      {
+        name: 'selectCutomerPlug',
+        label: '选择事件',
+        initialSource: [
+          { text: '选择一', value: '1' },
+          { text: '选择二', value: '2' },
+          { text: '选择三', value: '3' },
+        ],
+        field: {
+          type: 'selectEnterField',
+          props: {
+            placeholder: '请选择',
+          },
+        },
+      },
+      // ...queryFields,
     ],
     rowKey: 'id',
     actionsRender: [...actions],

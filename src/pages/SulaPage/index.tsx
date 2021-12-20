@@ -51,7 +51,7 @@ function SulaPage(props: Props) {
             type: (ctx: any) => {
               if (!ctx.values[0]) {
                 ctx.form.setFieldVisible(ctx.name, false);
-              } 
+              }
             },
           },
         },
@@ -127,13 +127,15 @@ function SulaPage(props: Props) {
         field: {
           type: 'checkboxgroup',
           props: {
-            onChange: (e) => { console.log(e)}
+            onChange: (e) => {
+              console.log(e);
+            },
 
             // styles: { margin: '0 50px' }
-          }
+          },
         },
         rules: [{ required: true, message: '请选择水果' }],
-      }
+      },
     ],
     actionsRender: [
       {
@@ -152,22 +154,19 @@ function SulaPage(props: Props) {
               ...result,
             }),
           },
-     
         ],
-        
       },
       {
         type: 'button',
         props: {
           children: '取消',
         },
-        visible: ({ form }: { form: ProFormInstance}) => {
-          console.log('xxxxxx', form, form.getFieldValue('ages'))
+        visible: ({ form }: { form: ProFormInstance }) => {
+          console.log('xxxxxx', form, form.getFieldValue('ages'));
         },
         // action: [
-          
+
         // ]
-       
       },
     ],
   };
@@ -192,7 +191,7 @@ function SulaPage(props: Props) {
     const antdPagination: any = document.querySelector('.ant-pagination'); // 实际分页dom
 
     // if (antdPagination && (position.bottom > vHeight || position.bottom === vHeight)) {
-    
+
     /**设置分页悬浮（添加fixed布局） */
     if (antdPagination) {
       if (tableBody.bottom + 64 >= vHeight && tableBody.top + 100 <= vHeight) {
@@ -218,14 +217,14 @@ function SulaPage(props: Props) {
     /**设置表头悬浮（表头添加fixed布局） */
     const tableTitle: any = document.querySelector('.ant-table-thead1'); // 获取表头dom
     if (tableTitle) {
-      if (tableBody.top - 75 <= 0) { // 在fixed布局中，不考虑表头和tablebody.bottom同水平的需要正常展示表头
+      if (tableBody.top - 75 <= 0) {
+        // 在fixed布局中，不考虑表头和tablebody.bottom同水平的需要正常展示表头
         tableTitle.style.position = 'fixed';
         tableTitle.style.top = '45px';
         tableTitle.style.zIndex = '10';
       } else {
         tableTitle.style.position = 'initial';
       }
-
     }
   };
 
@@ -253,14 +252,15 @@ function SulaPage(props: Props) {
 
   return (
     <div className={styles.sulaWrap}>
-      <Form {...config} className={styles.sulaFormWrap}/>
+      <SulaTable />
+      <div style={{ borderTop: '20px solid #f0f2f5' }} />
+      <Form {...config} className={styles.sulaFormWrap} />
       <div className={styles.sulaTableTest}>
         测试
-        <div className={styles.qiantaoStyle}>样式</div>  
+        <div className={styles.qiantaoStyle}>样式</div>
       </div>
-      <div style={{ borderTop: '20px solid #f0f2f5' }} />
+ 
       {/* <SulaForm {...config} /> */}
-      <SulaTable />
     </div>
   );
 }
