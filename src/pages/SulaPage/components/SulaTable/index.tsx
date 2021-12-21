@@ -16,21 +16,30 @@ export default function BasicDemo() {
 
   const remoteDataSource = {
     url: 'https://randomuser.me/api',
-    method: 'GET',
+    method: 'get',
 
-    convertParams({ params }) {
-      // 剔除对象里面为空的字段
-      const filters = params?.filters || {};
-      for (const key in filters) {
-        if (!filters[key]) {
-          delete filters[key];
-        }
-      }
-      return {
-        results: params.pageSize,
-        ...filters,
-      };
-    },
+    // convertParams({ params }) {
+    //   // 剔除对象里面为空的字段
+    //   const filters = params?.filters || {};
+    //   for (const key in filters) {
+    //     if (!filters[key]) {
+    //       delete filters[key];
+    //     }
+    //   }
+    //   /**日期字段特殊处理 */
+    //   if (filters.rangePickerCutomerPlug) {
+    //     const [dateStart, dateEnd] = filters.rangePickerCutomerPlug;
+    //     filters.dateStart = dateStart;
+    //     filters.dateEnd = dateEnd;
+    //     delete filters.rangePickerCutomerPlug;
+    //   }
+   
+    //   return {
+    //     results: params.pageSize,
+    //     ...filters,
+    //   };
+    // },
+    convertParams: 'tableConvertParamsType',
     converter({ data, table }) {
       setTableProps(table);
       return {
@@ -237,6 +246,16 @@ export default function BasicDemo() {
           type: 'selectEnterField',
           props: {
             placeholder: '请选择',
+          },
+        },
+      },
+      {
+        name: 'dateStart*fullDate*dateEnd',
+        label: '时间事件',
+        field: {
+          type: 'rangePickerEnterField',
+          props: {
+            placeholder: '请输入',
           },
         },
       },
