@@ -3,10 +3,12 @@ import DragDropTable from '@/components/DragDropTable';
 import EditableTable from '@/components/EditableTable';
 import PriorityConfig from '@/components/PriorityConfig';
 import Algorithm from './components/Algorithm';
+import AntdTable from './components/AntdTable';
 import CssTest from './components/CssTest';
 import HOC from './components/HOC';
 import MyTestTree from './components/MyTestTree';
 import PositioningData from './components/PositioningData';
+import MyProTable from './components/MyProTable';
 import SearchHighlight from './components/SearchHighlight';
 import styles from './index.less';
 
@@ -30,6 +32,8 @@ function MyPage(props: MyPageProps) {
     <SearchHighlight />,
     <HOC />,
     <MyTestTree />,
+    <MyProTable />,
+    <AntdTable />,
   ];
 
   return (
