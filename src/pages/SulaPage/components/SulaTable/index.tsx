@@ -259,6 +259,19 @@ export default function BasicDemo() {
           },
         },
       },
+      {
+        name: 'checkboxCutomerPlug',
+        label: '多选事件',
+        itemLayout: { span: 10 },
+        initialSource: [
+          { text: '多选框1', value: '1' },
+          { text: '多选框2', value: '2' },
+          { text: '多选框3', value: '3' },
+        ],
+        field: {
+          type: 'checkeboxEnterField',
+        },
+      },
       // ...queryFields,
     ],
     rowKey: 'id',

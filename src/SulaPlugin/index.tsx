@@ -3,11 +3,14 @@ import sula from 'sula/es/core';
 import InputEnterField from './components/inputEnterField';
 import SelectEnterField from './components/selectEnterField';
 import RangePickerEnterField from './components/rangePickerEnterField';
+import CheckeboxEnterField from './components/checkeboxEnterField';
 import moment from 'moment';
 
 registerFieldPlugin('inputEnterField')(InputEnterField, true, true);
 registerFieldPlugin('selectEnterField')(SelectEnterField, true, true);
 registerFieldPlugin('rangePickerEnterField')(RangePickerEnterField, true, true);
+registerFieldPlugin('checkeboxEnterField')(CheckeboxEnterField, true, true);
+
 
 /* 查询表单数据处理插件 */
 sula.convertParamsType('tableConvertParamsType', (ctx, config: any) => {
