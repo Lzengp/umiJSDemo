@@ -1,3 +1,4 @@
+import { decodeAES, encodeAES } from '@/util/encodeUtil';
 import React, { useState } from 'react';
 import { QueryTable } from 'sula';
 
@@ -42,6 +43,7 @@ export default function BasicDemo() {
     convertParams: 'tableConvertParamsType',
     converter({ data, table }) {
       setTableProps(table);
+      console.log('密钥：', encodeAES('longwei'), ',解密：', decodeAES('/L1T+rNDAvk//uRCVMB1Sw=='));
       return {
         list: data.results.map((item, index) => {
           return {
@@ -270,6 +272,18 @@ export default function BasicDemo() {
         ],
         field: {
           type: 'checkeboxEnterField',
+        },
+      },
+      {
+        name: 'radioCutomerPlug',
+        label: '单选事件',
+        initialSource: [
+          { text: '单选框1', value: '1' },
+          { text: '单选框2', value: '2' },
+          { text: '单选框3', value: '3' },
+        ],
+        field: {
+          type: 'radioEnterField',
         },
       },
       // ...queryFields,

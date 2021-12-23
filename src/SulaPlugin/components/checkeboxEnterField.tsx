@@ -1,7 +1,7 @@
 import { Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 
-function EnterSelect(props: any) {
+function CheckeboxEnterField(props: any) {
   const { value: propsValue, defaultValue, disabled, onChange: propsOnChange, ctx } = props;
   const [indeterminate, setIndeterminate] = useState<any>(); // 部分选中
   const [checkAll, setCheckAll] = useState<any>(); // 全选
@@ -61,4 +61,4 @@ function EnterSelect(props: any) {
   );
 }
 
-export default EnterSelect;
+export default CheckeboxEnterField;

@@ -2,7 +2,7 @@ import { DatePicker } from 'antd';
 
 const { RangePicker } = DatePicker;
 
-function EnterSelect(props: any) {
+function RangePickerEnterField(props: any) {
   const { value, disabled, onChange: propsOnChange, ctx } = props;
 
   /**时间控件不太适合绑定keyDown事件，因为会触发控件本身的打开选择日期面版操作 */
@@ -35,4 +35,4 @@ function EnterSelect(props: any) {
   );
 }
 
-export default EnterSelect;
+export default RangePickerEnterField;
