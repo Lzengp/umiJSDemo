@@ -10,6 +10,7 @@ import MyTestTree from './components/MyTestTree';
 import PositioningData from './components/PositioningData';
 import MyProTable from './components/MyProTable';
 import SearchHighlight from './components/SearchHighlight';
+import NativeDrag from './components/NativeDrag';
 import styles from './index.less';
 
 interface MyPageProps {}
@@ -18,6 +19,7 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   const components = [
+    <NativeDrag />,
     <CssTest />,
     <PositioningData />,
     <EditableTable />,

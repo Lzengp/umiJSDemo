@@ -112,8 +112,6 @@ function MyTestTree(props: MyTestTreeProps) {
     );
   };
 
-  console.log(checkedKeys, dataSoure);
-
   return <>{Demo()}</>;
 }
 

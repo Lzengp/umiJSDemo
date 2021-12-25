@@ -12,8 +12,6 @@ function CssTest(props: Props) {
 
   const testData = new Array(10).fill('1');
 
-  console.log(testData)
-
   return (
     <div className={styles.cssWrap}>
       <div style={{ margin: 20, display: 'flex', justifyContent: 'space-between' }}>
@@ -24,7 +22,7 @@ function CssTest(props: Props) {
       </div>
       <div className={styles.mySelector}>
         {
-          testData.map((item, index) => index % 2 === 0 ? <p className={styles.mySelectorItemEven}>{index}</p> : <p className={styles.mySelectorItemOdd}>{index}</p>)
+          testData.map((item, index) => index % 2 === 0 ? <p className={styles.mySelectorItemEven} key={index}>{index}</p> : <p className={styles.mySelectorItemOdd}  key={index}>{index}</p>)
         }
       </div>
 

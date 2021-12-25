@@ -146,7 +146,6 @@ export default () => {
       columns={columns}
       actionRef={actionRef}
       request={async (params = {}, sort, filter) => {
-        console.log(sort, filter);
         return request<{
           data: GithubIssueItem[];
         }>('https://proapi.azurewebsites.net/github/issues', {
