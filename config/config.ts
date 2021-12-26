@@ -25,123 +25,6 @@ function slash(path: string) {
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const webpackPlugin = (config: any) => {
-  if (isProd) {
-    config.merge({
-      optimization: {
-        minimize: true,
-        splitChunks: {
-          chunks: 'async',
-          minSize: 20000,
-          minChunks: 2,
-          automaticNameDelimiter: '.',
-          cacheGroups: {
-            vendor: {
-              name: 'vendors',
-              test: /^.*node_modules[\\/](?!ag-grid-|wangeditor|react-virtualized|rc-select|rc-drawer|rc-time-picker|rc-tree|rc-table|rc-calendar).*$/,
-              chunks: 'all',
-              priority: 10,
-            },
-            virtualized: {
-              name: 'virtualized',
-              test: /[\\/]node_modules[\\/]react-virtualized/,
-              chunks: 'all',
-              priority: 10,
-            },
-            rcselect: {
-              name: 'rc-select',
-              test: /[\\/]node_modules[\\/]rc-select/,
-              chunks: 'all',
-              priority: 10,
-            },
-            // antd: {
-            //     name: 'antd',
-            //     test: /[\\/]node_modules[\\/]antd/,
-            //     chunks: 'all',
-            //     priority: 10,
-            // },
-            rcdrawer: {
-              name: 'rcdrawer',
-              test: /[\\/]node_modules[\\/]rc-drawer/,
-              chunks: 'all',
-              priority: 10,
-            },
-            rctimepicker: {
-              name: 'rctimepicker',
-              test: /[\\/]node_modules[\\/]rc-time-picker/,
-              chunks: 'all',
-              priority: 10,
-            },
-            ag: {
-              name: 'ag',
-              test: /[\\/]node_modules[\\/]ag-grid-/,
-              chunks: 'all',
-              priority: 10,
-            },
-            // antd: {
-            //     name: "antd",
-            //     test: /[\\/]node_modules[\\/]antd[\\/]/,
-            //     chunks: "all",
-            //     priority: 9
-            // },
-            rctree: {
-              name: 'rctree',
-              test: /[\\/]node_modules[\\/]rc-tree/,
-              chunks: 'all',
-              priority: -1,
-            },
-            rccalendar: {
-              name: 'rccalendar',
-              test: /[\\/]node_modules[\\/]rc-calendar[\\/]/,
-              chunks: 'all',
-              priority: -1,
-            },
-            rctable: {
-              name: 'rctable',
-              test: /[\\/]node_modules[\\/]rc-table[\\/]es[\\/]/,
-              chunks: 'all',
-              priority: -1,
-            },
-            wang: {
-              name: 'wang',
-              test: /[\\/]node_modules[\\/]wangeditor[\\/]/,
-              chunks: 'all',
-              priority: -1,
-            },
-            // lodash: {
-            //     name: 'lodash',
-            //     test: /[\\/]node_modules[\\/]lodash[\\/]/,
-            //     chunks: 'all',
-            //     priority: -2,
-            // },
-            bizcharts: {
-              name: 'bizcharts',
-              test: /[\\/]node_modules[\\/]bizcharts[\\/]/,
-              chunks: 'all',
-              priority: 10,
-            },
-            xlsx: {
-              name: 'xlsx',
-              test: /[\\/]node_modules[\\/]xlsx[\\/]/,
-              chunks: 'async',
-              priority: 10,
-            },
-          },
-        },
-      },
-    });
-    config.plugin('compression-webpack-plugin').use(
-      new CompressionPlugin({
-        // filename: '[path].gz[query]',
-        algorithm: 'gzip', // 指定生成gzip格式
-        test: new RegExp('\\.(js|css)$'), // 匹配哪些格式文件需要压缩
-        threshold: 10240, // 对超过10k的数据进行压缩
-        minRatio: 0.6, // 压缩比例，值为0~1
-      }),
-    );
-  }
-};
-
 export default defineConfig({
   hash: true,
   antd: {},
@@ -203,9 +86,6 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
-  // 打包时移除 console
-  // extraBabelPlugins: [isProd ? 'transform-remove-console' : ''],
-  // chainWebpack: webpackPlugin,
   cssLoader: {
     modules: {
       // CSS Modules 模式 定义前缀作用域
@@ -231,36 +111,37 @@ export default defineConfig({
     },
   },
   // extraBabelPlugins: [isProd ? 'transform-remove-console' : ''], // 打包时移除 console
-  // chainWebpack: function (config, { webpack }) {
-  //   config.merge({
-  //     optimization: {
-  //       splitChunks: {
-  //         chunks: 'all',
-  //         minSize: 1000,
-  //         minChunks: 2,
-  //         automaticNameDelimiter: '.',
-  //         cacheGroups: {
-  //           vendor: {
-  //             name: 'vendors',
-  //             test({ resource }: { resource: any }) {
-  //               return /[\\/]node_modules[\\/]/.test(resource);
-  //             },
-  //             priority: 10,
-  //           },
-  //         },
-  //       },
-  //     },
-  //   });
-  //   if (isProd) {
-  //     // Gzip压缩
-  //     config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
-  //       {
-  //         test: /\.(js|css|html)$/i, // 匹配
-  //         threshold: 10240, // 超过10k的文件压缩
-  //         deleteOriginalAssets: false, // 不删除源文件
-  //         algorithm: 'gzip', // 压缩方式
-  //       },
-  //     ]);
-  //   }
-  // },
+  chunks: ['vendors-app', 'umi'],
+  chainWebpack: function (config, { webpack }) {
+    config.merge({
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+          minSize: 30000,
+          minChunks: 3,
+          automaticNameDelimiter: '.',
+          cacheGroups: {
+            vendor: {
+              name: 'vendors-app',
+              test({ resource }: { resource: any }) {
+                return /[\\/]node_modules[\\/]/.test(resource);
+              },
+              priority: 10,
+            },
+          },
+        },
+      },
+    });
+    if (isProd) {
+      // Gzip压缩
+      config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
+        {
+          test: /\.(js|css|html)$/i, // 匹配
+          threshold: 10240, // 超过10k的文件压缩
+          deleteOriginalAssets: false, // 不删除源文件
+          algorithm: 'gzip', // 压缩方式
+        },
+      ]);
+    }
+  },
 });
