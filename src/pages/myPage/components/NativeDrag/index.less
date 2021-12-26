@@ -1,48 +1,57 @@
+.scrollbar {
+  /*定义滚动条轨道*/
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /*定义滑块 样式*/
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #a9a9a9;
+    }
+  }
+}
+
 .nativeDragWrap {
-    height: 500px;
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  height: 500px;
 
+  .left {
+    width: 45%;
     .nativeDragLeft {
-        border: 1px solid #000;
-        width: 45%;
-        height: 400px;
-        display: flex;
-        flex-wrap: wrap;
+      display: flex;
+      flex-wrap: wrap;
+      height: 400px;
+      overflow: auto;
+      border: 1px solid #000;
 
+      .box1 {
+        margin: 20px 30px;
+      }
 
-        .box1 {
-            // width: 100px;
-            // height: 50px;
-            // border: 1px solid #000;
-            margin: 20px 30px;
-        }
-
-        // .box2 {
-        //     width: 100px;
-        //     height: 50px;
-        //     background-color: green;
-        // }
+      .scrollbar;
     }
+  }
 
+  .right {
+    width: 45%;
     .nativeDragRight {
-        border: 1px solid #000;
-        width: 45%;
-        height: 400px;
-        display: flex;
-        flex-wrap: wrap;
-        
-        .box1 {
-            // width: 100px;
-            // height: 50px;
-            // border: 1px solid #000;
-            margin: 20px 30px;
-        }
+      display: flex;
+      flex-wrap: wrap;
+      height: 400px;
+      overflow: auto;
+      border: 1px solid #000;
 
-        // .box2 {
-        //     width: 100px;
-        //     height: 50px;
-        //     background-color: green;
-        // }
+      .box1 {
+        margin: 20px 30px;
+      }
+
+      .scrollbar;
     }
+  }
 }
