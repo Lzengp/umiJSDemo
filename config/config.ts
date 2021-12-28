@@ -111,37 +111,37 @@ export default defineConfig({
     },
   },
   // extraBabelPlugins: [isProd ? 'transform-remove-console' : ''], // 打包时移除 console
-  chunks: ['vendors-app', 'umi'],
-  chainWebpack: function (config, { webpack }) {
-    config.merge({
-      optimization: {
-        splitChunks: {
-          chunks: 'all',
-          minSize: 30000,
-          minChunks: 3,
-          automaticNameDelimiter: '.',
-          cacheGroups: {
-            vendor: {
-              name: 'vendors-app',
-              test({ resource }: { resource: any }) {
-                return /[\\/]node_modules[\\/]/.test(resource);
-              },
-              priority: 10,
-            },
-          },
-        },
-      },
-    });
-    if (isProd) {
-      // Gzip压缩
-      config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
-        {
-          test: /\.(js|css|html)$/i, // 匹配
-          threshold: 10240, // 超过10k的文件压缩
-          deleteOriginalAssets: false, // 不删除源文件
-          algorithm: 'gzip', // 压缩方式
-        },
-      ]);
-    }
-  },
+  // chunks: ['vendors-app', 'umi'],
+  // chainWebpack: function (config, { webpack }) {
+  //   config.merge({
+  //     optimization: {
+  //       splitChunks: {
+  //         chunks: 'all',
+  //         minSize: 30000,
+  //         minChunks: 3,
+  //         automaticNameDelimiter: '.',
+  //         cacheGroups: {
+  //           vendor: {
+  //             name: 'vendors-app',
+  //             test({ resource }: { resource: any }) {
+  //               return /[\\/]node_modules[\\/]/.test(resource);
+  //             },
+  //             priority: 10,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  //   if (isProd) {
+  //     // Gzip压缩
+  //     config.plugin('compression-webpack-plugin').use(CompressionPlugin, [
+  //       {
+  //         test: /\.(js|css|html)$/i, // 匹配
+  //         threshold: 10240, // 超过10k的文件压缩
+  //         deleteOriginalAssets: false, // 不删除源文件
+  //         algorithm: 'gzip', // 压缩方式
+  //       },
+  //     ]);
+  //   }
+  // },
 });

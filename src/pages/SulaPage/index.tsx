@@ -136,6 +136,14 @@ function SulaPage(props: Props) {
         },
         rules: [{ required: true, message: '请选择水果' }],
       },
+      {
+        name: 'files',
+        label: '附件',
+        field: {
+          type: 'uploadField',
+        },
+        rules: [{ required: true, message: '请上传附件' }],
+      },
     ],
     actionsRender: [
       {
@@ -146,10 +154,10 @@ function SulaPage(props: Props) {
         },
         action: [
           'validateFields',
-          { type: 'assignResult', args: [{ hello: 'kitty' }] },
+          // { type: 'assignResult', args: [{ hello: 'kitty' }] },
           {
             url: 'https://www.mocky.io/v2/5ed7a8b63200001ad9274ab5',
-            // method: 'post',
+            method: 'post',
             params: ({ result }: { result: any }) => ({
               ...result,
             }),
@@ -252,14 +260,14 @@ function SulaPage(props: Props) {
 
   return (
     <div className={styles.sulaWrap}>
-      <SulaTable />
-      <div style={{ borderTop: '20px solid #f0f2f5' }} />
       <Form {...config} className={styles.sulaFormWrap} />
+      <div style={{ borderTop: '20px solid #f0f2f5' }} />
+      <SulaTable />
       <div className={styles.sulaTableTest}>
         测试
         <div className={styles.qiantaoStyle}>样式</div>
       </div>
- 
+
       {/* <SulaForm {...config} /> */}
     </div>
   );
