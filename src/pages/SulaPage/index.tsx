@@ -10,7 +10,6 @@ interface Props {}
 function SulaPage(props: Props) {
   const config = {
     initialValues: {
-      // hideParam: '隐藏的',
       name: '龙伟',
       ages: '',
       address: '湖南衡阳',
