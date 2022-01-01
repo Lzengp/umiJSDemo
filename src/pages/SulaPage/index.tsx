@@ -1,4 +1,3 @@
-import SulaForm from '@/components/SulaForm';
 import { ProFormInstance } from '@ant-design/pro-form';
 import { useEffect } from 'react';
 import { Form } from 'sula';
@@ -140,6 +139,22 @@ function SulaPage(props: Props) {
         label: '附件',
         field: {
           type: 'uploadField',
+          props: {
+            // beforeUpload: (file) => {
+            //   const maxUploadSize = 0.01;
+            //   if (
+            //     maxUploadSize &&
+            //     Number((Number(file.size) / 1024 / 1024).toFixed(2)) > maxUploadSize
+            //   ) {
+            //     message.error(`上传文件大小不能超过${maxUploadSize}M`);
+            //     return false;
+            //   }
+            //   return file;
+            // },
+            promptInfo: '(文件最大上传数量：5)',
+            fileType: 'png,jpg',
+            // disabled: true,
+          },
         },
         rules: [{ required: true, message: '请上传附件' }],
       },
