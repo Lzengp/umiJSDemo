@@ -121,15 +121,12 @@ function SulaPage(props: Props) {
             disabled: true,
           },
         ],
-        // initialValue: ['peach'],
         field: {
           type: 'checkboxgroup',
           props: {
             onChange: (e) => {
               console.log(e);
             },
-
-            // styles: { margin: '0 50px' }
           },
         },
         rules: [{ required: true, message: '请选择水果' }],
