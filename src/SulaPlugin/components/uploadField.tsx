@@ -9,13 +9,14 @@ interface UploadField {
   disabled?: boolean;
   maxCount?: number; // 上传的最大数量限制
   fileType?: string; // 限制的上传类型，字符串类型，例如： 'png,jpg,doc'
-  ctx: any;
+  ctx?: any;
 }
 
-function UploadField(props: UploadField) {
+function UploadField(props: any) {
   // props如果是EnterInputProps类型，在注册插件的时候提示警告
-  const { maxSize, promptInfo, disabled, ctx, maxCount, fileType } = props;
-  const [fileList, setFileList] = useState<Array<any>>([]); // 文件上传列表
+  const { maxSize, promptInfo, disabled, ctx, maxCount, fileType, value } = props;
+
+  const [fileList, setFileList] = useState<Array<any>>(value || []); // 文件上传列表
 
   const beforeUpload = async (file: any) => {
     /**文件上传大小限制 */
@@ -23,12 +24,12 @@ function UploadField(props: UploadField) {
       message.error(`上传文件大小不能超过${maxSize}M`);
       return false;
     }
-     /**上传文件类型限制 */
+    /**上传文件类型限制 */
     if (fileType && !fileType.includes(file.name.split('.')[1])) {
       message.error(`请上传指定类型的文件`);
       return false;
     }
-   
+
     return file;
   };
 
@@ -51,7 +52,7 @@ function UploadField(props: UploadField) {
       }
     },
     beforeUpload,
-    ...props,
+    // ...props,
   };
 
   const maxCountDisable = maxCount ? maxCount <= fileList.length : false; // 最大上传数量限制(注意: Upload的disabled属性如果是true,那么已经上传的就无法删除了 )

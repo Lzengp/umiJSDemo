@@ -41,6 +41,11 @@ const defaultData: DataSourceType[] = [
   },
 ];
 
+const optionsSource = {
+  task: taskState,
+  demand: demandState,
+};
+
 function EditableTable(props: EditableTableProps) {
   const {} = props;
 
@@ -95,24 +100,17 @@ function EditableTable(props: EditableTableProps) {
       key: 'state',
       dataIndex: 'state',
       renderFormItem: (_, config, form) => {
-        let options: any[] = [];
-        if (config.record?.type === 'task') {
-          options = taskState;
-        }
-        if (config.record?.type === 'demand') {
-          options = demandState;
-        }
-        return <RenderFromSelect name={`${config.recordKey}_state`} options={options} />;
+        return (
+          <RenderFromSelect
+            name={`${config.recordKey}_state`}
+            options={optionsSource[config.record?.type || '']}
+          />
+        );
       },
       render: (text, row, index) => {
-        let options: any[] = [];
-        if (row.type === 'task') {
-          options = taskState;
-        }
-        if (row.type === 'demand') {
-          options = demandState;
-        }
-        const showTextObj = options?.find((n) => n.value === text);
+        const showTextObj = optionsSource[row?.type || '']?.find(
+          (n: { value: string }) => n.value === text,
+        );
         return showTextObj.label;
       },
       formItemProps: (form, { rowIndex }) => {

@@ -4,8 +4,6 @@ function EnterSelect(props: any) {
   // props如果是EnterInputProps类型，在注册插件的时候提示警告
   const { value, placeholder, disabled, onChange: propsOnChange, ctx } = props;
 
-  console.log(ctx);
-
   const onKeyDown = (e: any) => {
     console.log(e);
     // 键盘的Enter按键编码

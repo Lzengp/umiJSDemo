@@ -1,12 +1,15 @@
-import { ProFormInstance } from '@ant-design/pro-form';
-import { useEffect } from 'react';
-import { Form } from 'sula';
+import { ProFormInstance, ProFormSelect } from '@ant-design/pro-form';
+import { FormInstance } from 'antd/es/form/Form';
+import { useEffect, useRef } from 'react';
+import { Form, useForm } from 'sula';
 import SulaTable from './components/SulaTable';
 import styles from './index.less';
 
 interface Props {}
 
 function SulaPage(props: Props) {
+  const formRef = useRef<any>({});
+
   const config = {
     initialValues: {
       name: '龙伟',
@@ -155,6 +158,70 @@ function SulaPage(props: Props) {
         },
         rules: [{ required: true, message: '请上传附件' }],
       },
+      {
+        name: 'myEditTable',
+        label: 'xx',
+        field: {
+          type: 'editTableField',
+          props: {
+            // headerTitle: '编辑表格',
+            columns: [
+              {
+                title: '名称',
+                key: 'name',
+                dataIndex: 'name',
+                isRequired: true,
+              },
+              {
+                title: '状态',
+                key: 'state',
+                dataIndex: 'state',
+                valueType: 'select',
+                valueEnum: [
+                  { text: '生效', value: '1' },
+                  { text: '失效', value: '2' },
+                  { text: '待定', value: '3' },
+                ],
+              },
+              {
+                title: '时间范围',
+                key: 'date',
+                dataIndex: 'date',
+                valueType: 'dateRange',
+                width: 250,
+              },
+              {
+                title: '操作',
+                valueType: 'option',
+                width: 200,
+                render: (text, record, _, action) => [
+                  <a
+                    key="editable"
+                    onClick={() => {
+                      action?.startEditable?.(record.id);
+                    }}
+                  >
+                    编辑
+                  </a>,
+                  <a
+                    key="delete"
+                    onClick={() => {
+                      // action?.cancelEditable?.(record.id);
+                      // 通过form表单里面的value来更新编辑表格里面的dataSource
+                      const myEditTableSource = formRef?.current.getFieldValue('myEditTable');
+                      const data = myEditTableSource.filter((item: { id: string }) => item.id !== record.id);
+                      formRef?.current.setFieldValue('myEditTable', data);
+                    }}
+                  >
+                    删除
+                  </a>,
+                ],
+              },
+            ],
+          },
+        },
+        rules: [{ required: true, message: '请输入数据' }],
+      },
     ],
     actionsRender: [
       {
@@ -181,7 +248,7 @@ function SulaPage(props: Props) {
           children: '取消',
         },
         visible: ({ form }: { form: ProFormInstance }) => {
-          console.log('xxxxxx', form, form.getFieldValue('ages'));
+          // console.log('xxxxxx', form, form.getFieldValue('ages'));
         },
         // action: [
 
@@ -271,7 +338,7 @@ function SulaPage(props: Props) {
 
   return (
     <div className={styles.sulaWrap}>
-      <Form {...config} className={styles.sulaFormWrap} />
+      <Form {...config} className={styles.sulaFormWrap} ref={formRef} />
       <div style={{ borderTop: '20px solid #f0f2f5' }} />
       <SulaTable />
       <div className={styles.sulaTableTest}>

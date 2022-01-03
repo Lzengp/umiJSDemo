@@ -6,6 +6,7 @@ import RangePickerEnterField from './components/rangePickerEnterField';
 import CheckeboxEnterField from './components/checkeboxEnterField';
 import RadioEnterField from './components/radioEnterField';
 import UploadField from './components/uploadField';
+import EditTableField from './components/EditTableField';
 import moment from 'moment';
 
 registerFieldPlugin('inputEnterField')(InputEnterField, true, true);
@@ -14,6 +15,7 @@ registerFieldPlugin('rangePickerEnterField')(RangePickerEnterField, true, true);
 registerFieldPlugin('checkeboxEnterField')(CheckeboxEnterField, true, true);
 registerFieldPlugin('radioEnterField')(RadioEnterField, true, true);
 registerFieldPlugin('uploadField')(UploadField, true, true);
+registerFieldPlugin('editTableField')(EditTableField, true, true);
 
 /* 查询表单数据处理插件 */
 sula.convertParamsType('tableConvertParamsType', (ctx, config: any) => {
