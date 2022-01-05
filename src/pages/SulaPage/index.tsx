@@ -1,11 +1,11 @@
-import { ProFormInstance, ProFormSelect } from '@ant-design/pro-form';
-import { FormInstance } from 'antd/es/form/Form';
+import { UmiRouteComponentProps } from '@/util';
+import { ProFormInstance } from '@ant-design/pro-form';
 import { useEffect, useRef } from 'react';
-import { Form, useForm } from 'sula';
+import { Form } from 'sula';
 import SulaTable from './components/SulaTable';
 import styles from './index.less';
 
-interface Props {}
+interface Props extends UmiRouteComponentProps {}
 
 function SulaPage(props: Props) {
   const formRef = useRef<any>({});
@@ -209,7 +209,9 @@ function SulaPage(props: Props) {
                       // action?.cancelEditable?.(record.id);
                       // 通过form表单里面的value来更新编辑表格里面的dataSource
                       const myEditTableSource = formRef?.current.getFieldValue('myEditTable');
-                      const data = myEditTableSource.filter((item: { id: string }) => item.id !== record.id);
+                      const data = myEditTableSource.filter(
+                        (item: { id: string }) => item.id !== record.id,
+                      );
                       formRef?.current.setFieldValue('myEditTable', data);
                     }}
                   >
@@ -281,22 +283,12 @@ function SulaPage(props: Props) {
     /**设置分页悬浮（添加fixed布局） */
     if (antdPagination) {
       if (tableBody.bottom + 64 >= vHeight && tableBody.top + 100 <= vHeight) {
-        antdPagination.style.position = 'fixed';
-        antdPagination.style.bottom = '-16px';
-        antdPagination.style.width = 'calc(100% - 288px)';
-        antdPagination.style.background = '#FFF';
-        antdPagination.style.height = '64px';
-        antdPagination.style.display = 'flex';
-        antdPagination.style.alignItems = 'center';
-        antdPagination.style.justifyContent = 'flex-end';
-        antdPagination.style.zIndex = '10';
+        antdPagination.style.cssText =
+          'position: fixed; bottom: -16px; width: calc(100% - 288px); background: #FFF;' +
+          'height: 64px; display: flex; align-items: center; justify-content: flex-end; z-index: 10';
       } else {
-        // if (antdPagination && position.bottom < vHeight) {
-        antdPagination.style.position = 'initial';
-        antdPagination.style.display = 'flex';
-        antdPagination.style.justifyContent = 'flex-end';
-        antdPagination.style.width = '100%';
-        antdPagination.style.zIndex = '10';
+        antdPagination.style.cssText =
+          'position: initial; display: flex; justify-content: flex-end; width: 100%; z-index: 10;';
       }
     }
 

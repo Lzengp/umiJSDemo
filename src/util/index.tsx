@@ -1,5 +1,20 @@
 import { message } from 'antd';
 
+export type UmiRouteComponentProps<ParamsType = {}, QueryType = {}> = {
+  match: {
+    isExact: boolean;
+    params: ParamsType;
+    path: string;
+    url: string;
+  };
+  location: {
+    pathname: string;
+    hash: string;
+    search: string;
+    query: QueryType;
+  };
+};
+
 export const uuid = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = (Math.random() * 16) | 0,
