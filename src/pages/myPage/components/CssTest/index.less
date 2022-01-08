@@ -1,5 +1,5 @@
 .cssWrap {
-  height: 500px;
+  height: 600px;
   padding: 20px;
 
   .mySelector {
@@ -166,6 +166,35 @@
       margin-left: 20px;
       background-color: green;
       content: 'after';
+    }
+  }
+
+  /**动画效果和旋转 */
+  .animationStyle {
+    width: 300px;
+    height: 300px;
+    background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.90sjimg.com%2Foriginal_origin_pic%2F18%2F09%2F01%2Fc92e66e3eb4ed76b813b3d00adc98334.png&refer=http%3A%2F%2Fpic.90sjimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644232055&t=54bc99c30b88132bb8a8d3bae985ae0e);
+    background-repeat: no-repeat;
+    background-size: 300px 300px;
+    border-radius: 50%;
+    animation-name: myfirst; /* 动画名字，和@keyframes对应 */
+    animation-duration: 10s; /* 动画执行时长 */
+    animation-timing-function: linear; /* 动画执行的速度，linear表示匀速 */
+    animation-iteration-count: infinite; /* 动画运行的次数，infinite表示一直运行 */
+    animation-direction: normal; /* 动画执行的顺序，默认是normal，正常播放（向前播放） */
+
+    @keyframes myfirst {
+      0% {
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg); /* IE 9 */ /* Safari and Chrome */
+      }
+
+      100% {
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg); /* IE 9 */ /* Safari and Chrome */
+      }
     }
   }
 }
