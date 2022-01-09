@@ -11,6 +11,7 @@ import PositioningData from './components/PositioningData';
 import MyProTable from './components/MyProTable';
 import SearchHighlight from './components/SearchHighlight';
 import NativeDrag from './components/NativeDrag';
+import Canvas from './components/Canvas';
 import styles from './index.less';
 
 interface MyPageProps {}
@@ -19,6 +20,7 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   const components = [
+    <Canvas />,
     <NativeDrag />,
     <CssTest />,
     <PositioningData />,

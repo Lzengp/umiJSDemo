@@ -22,6 +22,17 @@ function CssTest(props: Props) {
     return () => {
       clearInterval(timer);
     };
+    // const id = requestAnimationFrame(() => {
+    //   setPercent((percent) => {
+    //     if (percent === 100) {
+    //       return (percent = 0);
+    //     }
+    //     return (percent += 10);
+    //   });
+    // });
+    // return () => {
+    //   cancelAnimationFrame(id);
+    // };
   }, []);
 
   const { count } = useModel('project', (modal) => ({
