@@ -13,6 +13,7 @@ import SearchHighlight from './components/SearchHighlight';
 import NativeDrag from './components/NativeDrag';
 import Canvas from './components/Canvas';
 import styles from './index.less';
+import TimeSelection from './components/TimeSelection';
 
 interface MyPageProps {}
 
@@ -20,6 +21,7 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   const components = [
+    <TimeSelection />,
     <Canvas />,
     <NativeDrag />,
     <CssTest />,
