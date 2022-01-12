@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import moment from 'moment';
 
 export type UmiRouteComponentProps<ParamsType = {}, QueryType = {}> = {
   match: {
@@ -71,4 +72,53 @@ export function isElementVisible(el: any) {
     rect.top - 48 < 0 || // 当元素上面部分开始遮挡的时候
     rect.bottom > vHeight // 当元素下面部门开始遮挡的时候
   );
+}
+
+/**传入日期，获取当前日期的星期, 默认当前时间的星期 */
+export function getWeek(value?: string) {
+  const weekList = ['日', '一', '二', '三', '四', '五', '六'];
+  const weekName = value ? weekList[new Date(value).getDay()] : weekList[new Date().getDay()];
+  return '星期' + weekName;
+}
+
+/**给定一个当前日期前后时间范围数，获取前后时间之间的所有日期, 一个参数的时候 */
+export const getRangeDayByRangeOneValue = (rangeValue: number) => {
+  let date: Array<string> = new Array(rangeValue * 2).fill('');
+  let orgValue = rangeValue;
+  while(rangeValue >= 0) {
+    date[orgValue - rangeValue] = moment().subtract(rangeValue, 'days').format('YYYY-MM-DD');
+    date[orgValue + rangeValue] = moment().add(rangeValue, 'days').format('YYYY-MM-DD')
+    rangeValue--;
+  }
+  return date;
+}
+
+/**给定两个当前日期前后时间范围数，获取前后时间之间的所有日期, 两个参数的时候 */
+export const getRangeDayByRangeTwoValue = (frontRangeValue: number, afterRangeValue: number) => {
+  const frontDate: Array<string> = [];
+  const afterDate: Array<string> = [];
+  while(frontRangeValue >= 0) {
+    frontDate.push(moment().subtract(frontRangeValue, 'days').format('YYYY-MM-DD'));
+    frontRangeValue--;
+  }
+  while(afterRangeValue) {
+    afterDate.push(moment().add(afterRangeValue, 'days').format('YYYY-MM-DD'));
+    afterRangeValue--;
+  }
+  return frontDate.concat(afterDate.reverse());
+}
+
+/**给定时间范围，获取范围内所有的日期 */
+export function getRangeDay(startDay: string, endDay: string){
+  const timeInterval = moment(endDay).diff(moment(startDay), 'days');
+  let num = Math.abs(timeInterval);
+  let day = startDay;
+  const date: Array<string> = [];
+  // 如果输入的日期反了
+  if (timeInterval < 0) day = endDay;
+  while(num >=0) {
+    date.push(moment(day).add(num, 'days').format('YYYY-MM-DD'));
+    num--;
+  }
+  return date.reverse();
 }
