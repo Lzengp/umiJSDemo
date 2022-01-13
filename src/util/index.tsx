@@ -78,7 +78,7 @@ export function isElementVisible(el: any) {
 export function getWeek(value?: string) {
   const weekList = ['日', '一', '二', '三', '四', '五', '六'];
   const weekName = value ? weekList[new Date(value).getDay()] : weekList[new Date().getDay()];
-  return '星期' + weekName;
+  return '周' + weekName;
 }
 
 /**给定一个当前日期前后时间范围数，获取前后时间之间的所有日期, 一个参数的时候 */

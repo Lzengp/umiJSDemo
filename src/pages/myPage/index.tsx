@@ -22,7 +22,7 @@ function MyPage(props: MyPageProps) {
 
   const components = [
     <TimeSelection />,
-    <Canvas />,
+    // <Canvas />,
     <NativeDrag />,
     <CssTest />,
     <PositioningData />,
@@ -30,7 +30,7 @@ function MyPage(props: MyPageProps) {
     <DragDropTable />,
     <Algorithm />,
     <div className={styles.priorityConfig}>
-      <PriorityConfig />
+      {/* <PriorityConfig /> */}
     </div>,
     <div className={styles.customSelect}>
       <CustomSelect />

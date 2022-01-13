@@ -4,45 +4,27 @@
 
   .mainTime {
     display: flex;
-    width: 500px;
+    width: 600px;
     overflow: auto;
     user-select: none;
 
     .mainTimeItem {
       display: flex;
       align-items: center;
-      min-width: 115px;
       height: 100px;
       cursor: pointer;
-
-      //   &::before {
-      //     width: 2px;
-      //     height: 52%;
-      //     margin: 0 15px;
-      //     background-color: red;
-      //     content: '';
-      //   }
 
       .dayAndWeek {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100px;
       }
-
-      //   &:last-child {
-      //     &::after {
-      //       width: 2px;
-      //       height: 52%;
-      //       margin: 0 15px;
-      //       background-color: red;
-      //       content: '';
-      //     }
-      //   }
     }
 
     .selectedItem {
-        background-color: #2a8dfd;
+      background-color: #2a8dfd;
     }
   }
 
