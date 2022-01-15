@@ -25,11 +25,36 @@ function TimeSelection(props: TimeSelectionProps) {
     value = moment().format('YYYY-MM-DD'),
   } = props;
 
-  const [selectedDate, setselectedDate] = useState<string>(value);
+  const [selectedDate, setselectedDate] = useState<string>(value); // 选择的日期值
   const containerRef = useRef<any>();
   const [leftDisabled, setLeftDisabled] = useState<boolean>(false); // 左侧箭头按钮置灰
   const [rightDisabled, setRightDisabled] = useState<boolean>(false); // 右侧箭头按钮置灰
-  const [dateList, setDateList] = useState<Array<string>>();
+  const [datePickerValue, setDatePickerValue] = useState<string>(value); // antd日期组件选择的值，只是为了区分点击来源, 真实的value是selectedDate
+
+  /**默认选中当天, 滚动条应该要滚动到当天的位置，那么滚动的距离=框的宽度（100px） * 15个 = 1500px
+   * 如果给了选定的值，需要跳到选定值的位置
+   * 方案一：以给定的值为中心，然后前后各15天，这样滚动的位置还是1535，这个容易做
+   *
+   * 方案二：还是以当天为中心，前后各15天，但是，如果要滚动到给定日期，那么滚动的距离就要计算出来，
+   * （方案二实现：(当天日期 - 首天日期) * 每个日期展示框width ）
+   * */
+
+  // 方案一的实现方式
+  // const [dateList, setDateList] = useState<Array<string>>();
+  // useEffect(() => {
+  //   setDateList(getRangeDayByRangeOneValue(15, value));
+  // }, []);
+  // useEffect(() => {
+  //   dateList && containerRef.current?.scrollTo(1535, 0);
+  // }, [dateList]);
+
+  // 方案二的实现方式
+  const [dateList, setDateList] = useState<Array<string>>(getRangeDayByRangeOneValue(15));
+  useEffect(() => {
+    const IntervalDays = moment(datePickerValue).diff(moment(dateList[0]), 'days');
+    console.log(IntervalDays);
+    dateList && containerRef.current?.scrollTo(IntervalDays * 105, 0); // 这个105是调试的，实际框的大小是118
+  }, [dateList, datePickerValue]);
 
   console.log(props, dateList, selectedDate);
 
@@ -38,12 +63,6 @@ function TimeSelection(props: TimeSelectionProps) {
   }, [value]);
 
   useEffect(() => {
-    /**默认选中当天, 滚动条应该要滚动到当天的位置，那么滚动的距离=框的宽度（100px） * 15个 = 1500px
-     * 如果给了选定的值，需要跳到选定值的位置
-     * 方案一：以给定的值为中心，然后前后各15天，这样滚动的位置还是1535，这个容易做
-     * 方案二：还是以当天为中心，前后各15天，但是，如果要滚动到给定日期，那么滚动的距离就要计算出来，这个相对于方案一还是难做一点
-     * */
-    setDateList(getRangeDayByRangeOneValue(15, value));
     /**监听鼠标滑轮滚动事件 */
     containerRef.current?.addEventListener('wheel', moveWheel, false);
     function moveWheel(e: any) {
@@ -72,13 +91,10 @@ function TimeSelection(props: TimeSelectionProps) {
     };
   }, []);
 
-  useEffect(() => {
-    dateList && containerRef.current?.scrollTo(1535, 0);
-  }, [dateList]);
-
   /**时间改变事件 */
   const dateOnChange = (date: any, dateString: string) => {
     setselectedDate(dateString);
+    setDatePickerValue(dateString);
     typeof onChange === 'function' && onChange(dateString);
   };
 
