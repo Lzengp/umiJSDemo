@@ -14,14 +14,16 @@ import NativeDrag from './components/NativeDrag';
 import Canvas from './components/Canvas';
 import styles from './index.less';
 import TimeSelection from './components/TimeSelection';
+import { useState } from 'react';
 
 interface MyPageProps {}
 
 function MyPage(props: MyPageProps) {
   const {} = props;
+  const [timeValue, setTimeValue] = useState<string>("2022-01-18");
 
   const components = [
-    <TimeSelection />,
+    <TimeSelection onChange={(val) => {console.log(val); setTimeValue(val); }} value={timeValue}/>,
     // <Canvas />,
     <NativeDrag />,
     <CssTest />,

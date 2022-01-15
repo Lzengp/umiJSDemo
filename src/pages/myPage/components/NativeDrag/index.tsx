@@ -21,8 +21,6 @@ function NativeDrag(props: Props) {
     Array<{ index: number; name: string; age: number }>
   >([]);
 
-  console.log(testDate, leftContent, rightContent);
-
   const onDrop = (event: any, flag: string) => {
     const e = event || window.event;
     const data = e.dataTransfer.getData('text');

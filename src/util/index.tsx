@@ -82,12 +82,12 @@ export function getWeek(value?: string) {
 }
 
 /**给定一个当前日期前后时间范围数，获取前后时间之间的所有日期, 一个参数的时候 */
-export const getRangeDayByRangeOneValue = (rangeValue: number) => {
+export const getRangeDayByRangeOneValue = (rangeValue: number, day?: string) => {
   let date: Array<string> = new Array(rangeValue * 2).fill('');
   let orgValue = rangeValue;
   while(rangeValue >= 0) {
-    date[orgValue - rangeValue] = moment().subtract(rangeValue, 'days').format('YYYY-MM-DD');
-    date[orgValue + rangeValue] = moment().add(rangeValue, 'days').format('YYYY-MM-DD')
+    date[orgValue - rangeValue] = moment(day).subtract(rangeValue, 'days').format('YYYY-MM-DD');
+    date[orgValue + rangeValue] = moment(day).add(rangeValue, 'days').format('YYYY-MM-DD')
     rangeValue--;
   }
   return date;
