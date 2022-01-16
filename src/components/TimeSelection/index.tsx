@@ -56,8 +56,6 @@ function TimeSelection(props: TimeSelectionProps) {
     dateList && containerRef.current?.scrollTo(IntervalDays * 105, 0); // 这个105是调试的，实际框的大小是118
   }, [dateList, datePickerValue]);
 
-  console.log(props, dateList, selectedDate);
-
   useEffect(() => {
     value && setselectedDate(value);
   }, [value]);

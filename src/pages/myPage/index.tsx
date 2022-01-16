@@ -13,17 +13,15 @@ import SearchHighlight from './components/SearchHighlight';
 import NativeDrag from './components/NativeDrag';
 import Canvas from './components/Canvas';
 import styles from './index.less';
-import TimeSelection from './components/TimeSelection';
-import { useState } from 'react';
+import FlightCourseSelection from './components/FlightCourseSelection';
 
 interface MyPageProps {}
 
 function MyPage(props: MyPageProps) {
   const {} = props;
-  const [timeValue, setTimeValue] = useState<string>("2022-01-18");
 
   const components = [
-    <TimeSelection onChange={(val) => {console.log(val); setTimeValue(val); }} value={timeValue}/>,
+    <FlightCourseSelection />,
     // <Canvas />,
     <NativeDrag />,
     <CssTest />,
@@ -31,9 +29,7 @@ function MyPage(props: MyPageProps) {
     <EditableTable />,
     <DragDropTable />,
     <Algorithm />,
-    <div className={styles.priorityConfig}>
-      {/* <PriorityConfig /> */}
-    </div>,
+    <div className={styles.priorityConfig}>{/* <PriorityConfig /> */}</div>,
     <div className={styles.customSelect}>
       <CustomSelect />
     </div>,
