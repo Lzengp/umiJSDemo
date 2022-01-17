@@ -14,11 +14,38 @@ import NativeDrag from './components/NativeDrag';
 import Canvas from './components/Canvas';
 import styles from './index.less';
 import FlightCourseSelection from './components/FlightCourseSelection';
+import request from 'umi-request';
+import { useEffect } from 'react';
 
 interface MyPageProps {}
 
 function MyPage(props: MyPageProps) {
   const {} = props;
+
+  useEffect(() => {
+    // request
+    //   .get(
+    //     'https://proapi.azurewebsites.net/github/issues', {
+    //       params: {
+    //         current: 1,
+    //         pageSize: 5,
+    //       }
+    //     }
+    //   )
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    request('https://proapi.azurewebsites.net/github/issues1', {
+      method: 'GET',
+      params: {
+        current: 1,
+        pageSize: 5,
+      },
+    });
+  }, []);
 
   const components = [
     <FlightCourseSelection />,
