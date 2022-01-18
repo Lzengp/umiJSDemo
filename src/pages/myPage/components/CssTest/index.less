@@ -197,4 +197,22 @@
       }
     }
   }
+
+  .textTwinkle {
+    margin: 3px 0 0 50px;
+    animation-name: textTwinkle; /* 动画名字，和@keyframes对应 */
+    animation-duration: 0.8s; /* 动画执行时长 */
+    animation-timing-function: linear; /* 动画执行的速度，linear表示匀速 */
+    animation-iteration-count: infinite; /* 动画运行的次数，infinite表示一直运行 */
+    animation-direction: normal; /* 动画执行的顺序，默认是normal，正常播放（向前播放） */
+
+    @keyframes textTwinkle {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  }
 }

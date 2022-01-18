@@ -90,6 +90,8 @@ function CssTest(props: Props) {
             }}
           />
         </div>
+        {/* 参考：https://www.mybj123.com/6311.html */}
+        <div className={styles.textTwinkle}>文字闪烁</div>
       </div>
     </div>
   );
