@@ -63,7 +63,6 @@ export function isElementVisible(el: any) {
   const rect = el.getBoundingClientRect();
   const vWidth = window.innerWidth || document.documentElement.clientWidth;
   const vHeight = window.innerHeight || document.documentElement.clientHeight;
-
   return !(
     rect.right < 0 ||
     rect.bottom < 0 ||
