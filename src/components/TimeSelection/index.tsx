@@ -72,10 +72,13 @@ function TimeSelection(props: TimeSelectionProps) {
     /**监听滚动事件 */
     containerRef.current?.addEventListener('scroll', onscroll, false);
     function onscroll(e: any) {
+      const dateMainTimeDom = document.getElementById('dateMainTime');
+      const maxScrollWidth =
+        Number(dateMainTimeDom?.scrollWidth) - Number(dateMainTimeDom?.clientWidth); // 最大滚动距离 = 元素实际长度 - 元素可视长度
       if (e.currentTarget.scrollLeft < 100) {
         setLeftDisabled(true);
         setRightDisabled(false);
-      } else if (e.currentTarget.scrollLeft >= 3075) {
+      } else if (e.currentTarget.scrollLeft >= maxScrollWidth) {
         setLeftDisabled(false);
         setRightDisabled(true);
       } else {

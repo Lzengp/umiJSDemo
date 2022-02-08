@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, useContext } from 'react';
 import styles from './index.less';
 import Context from './context';
 import { useDispatch, useModel, useSelector } from 'umi';
+import { useDebounce } from '@/hooks';
 interface Props {}
 
 function Algorithm(props: Props) {
@@ -20,6 +21,9 @@ function Algorithm(props: Props) {
   }));
   const [positionFixedTop, setPositionFixedTop] = useState<boolean>(false); // 在窗口上面出现
   const [positionFixedBottom, setPositionFixedBottom] = useState<boolean>(false); // 在窗口下面出现
+
+  const [debounceFlag, setDebounceFlag] = useState<number>(0);
+  useDebounce(() => { debounceFlag && console.log('自定义hooks')}, 500, [debounceFlag]); // 自定义hooks-防抖
 
   useEffect(() => {
     dispatch({
@@ -253,7 +257,8 @@ function Algorithm(props: Props) {
 
   const testFn = () => {
     // console.log(factorial(4));
-    console.log(stringIncrementer('foobar009'));
+    setDebounceFlag(debounceFlag + 1)
+    // console.log(stringIncrementer('foobar009'));
   };
 
   return (

@@ -121,3 +121,18 @@ export function getRangeDay(startDay: string, endDay: string){
   }
   return date.reverse();
 }
+
+export const fn = (val: number) => {
+  let n: number = 5;
+  let resArr: Array<number> = [];
+  while(n >= 1){
+    const res = parseInt(((val % Math.pow(10,n)) / Math.pow(10, n - 1)).toString()) 
+    if (res) {
+      resArr = [...resArr, res, Math.pow(10, n - 1)]
+    } else {
+      resArr = [...resArr, res]
+    }
+    n--;
+  }
+  console.log(resArr)
+}
