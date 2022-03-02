@@ -16,6 +16,7 @@ import styles from './index.less';
 import FlightCourseSelection from './components/FlightCourseSelection';
 import request from 'umi-request';
 import { useEffect } from 'react';
+import { GetWeek } from 'lzengp-util';
 
 interface MyPageProps {}
 
@@ -23,6 +24,7 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   useEffect(() => {
+    console.log('xxxx', GetWeek('', true))
     // request
     //   .get(
     //     'https://proapi.azurewebsites.net/github/issues', {

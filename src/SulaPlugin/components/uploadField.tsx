@@ -1,18 +1,9 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
 import { useState } from 'react';
-import { FileType } from './interface';
+import { UploadFieldProps } from './interface';
 
-interface UploadField {
-  maxSize?: number; // 上传文件大小限制
-  promptInfo?: string;
-  disabled?: boolean;
-  maxCount?: number; // 上传的最大数量限制
-  fileType?: string; // 限制的上传类型，字符串类型，例如： 'png,jpg,doc'
-  ctx?: any;
-}
-
-function UploadField(props: any) {
+function UploadField(props: UploadFieldProps) {
   // props如果是EnterInputProps类型，在注册插件的时候提示警告
   const { maxSize, promptInfo, disabled, ctx, maxCount, fileType, value } = props;
 

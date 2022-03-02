@@ -74,10 +74,10 @@ export function isElementVisible(el: any) {
 }
 
 /**传入日期，获取当前日期的星期, 默认当前时间的星期 */
-export function getWeek(value?: string) {
+export function getWeek(value?: string, needDefault: boolean = false) {
   const weekList = ['日', '一', '二', '三', '四', '五', '六'];
-  const weekName = value ? weekList[new Date(value).getDay()] : weekList[new Date().getDay()];
-  return '周' + weekName;
+  const weekName = value ? weekList[new Date(value).getDay()] : needDefault ? weekList[new Date().getDay()] : '';
+  return weekName ? '星期' + weekName : '';
 }
 
 /**给定一个当前日期前后时间范围数，获取前后时间之间的所有日期, 一个参数的时候 */
