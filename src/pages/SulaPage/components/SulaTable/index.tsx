@@ -1,6 +1,8 @@
 import { decodeAES, encodeAES } from '@/util/encodeUtil';
+import classNames from 'classnames';
 import React, { useState } from 'react';
 import { QueryTable } from 'sula';
+import styles from './index.less';
 
 export default function BasicDemo() {
   const [tableProps, setTableProps] = useState<any>();
@@ -66,6 +68,7 @@ export default function BasicDemo() {
     {
       title: '国家',
       key: 'nat',
+      className: 'natStyle'
     },
     {
       title: '名字',
@@ -296,10 +299,19 @@ export default function BasicDemo() {
         console.log(selectedRowKeys, selectedRows);
       },
     },
+    tableProps: { 
+      rowClassName: (record) => {
+        let text = '';
+        if (record){
+          text = 'myPaySelectedStyle';
+        }
+        return classNames(text)
+      }
+    }
   };
 
   return (
-    <div>
+    <div className={styles.sulaTableWrap}>
       <div style={{ padding: 16, marginTop: 16 }}>
         <QueryTable {...config} />
       </div>
