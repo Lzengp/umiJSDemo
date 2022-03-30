@@ -23,6 +23,15 @@ interface MyPageProps {}
 function MyPage(props: MyPageProps) {
   const {} = props;
 
+  const sleep = (timeout: number) => {
+    return new Promise((resolve,reject)=>{
+      setTimeout(() => {
+        resolve('ok')
+      }, timeout);
+    })
+ 
+  }
+
   useEffect(() => {
     console.log('xxxx', GetWeek('', true))
     // request
@@ -40,14 +49,21 @@ function MyPage(props: MyPageProps) {
     //   .catch(function (error) {
     //     console.log(error);
     //   });
-    request('https://proapi.azurewebsites.net/github/issues1', {
+    myTestFn();
+  }, []);
+
+  const myTestFn = async () => {
+    let data = {};
+    request('https://proapi.azurewebsites.net/github/issues', {
       method: 'GET',
       params: {
         current: 1,
         pageSize: 5,
       },
-    });
-  }, []);
+    }).then(res => {console.log(res); data = res;});
+    const a = await sleep(100)
+    console.log(data)
+  }
 
   const components = [
     <FlightCourseSelection />,

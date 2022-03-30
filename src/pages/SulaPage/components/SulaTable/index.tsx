@@ -1,7 +1,9 @@
 import { decodeAES, encodeAES } from '@/util/encodeUtil';
 import classNames from 'classnames';
+import { values } from 'lodash';
 import React, { useState } from 'react';
 import { QueryTable } from 'sula';
+import { request } from 'umi';
 import styles from './index.less';
 
 export default function BasicDemo() {
@@ -17,35 +19,52 @@ export default function BasicDemo() {
       };
     });
 
+  const myTestFn = (callback: any) => {
+    request('https://proapi.azurewebsites.net/github/issues', {
+      method: 'GET',
+      params: {
+        current: 1,
+        pageSize: 5,
+      },
+    }).then((res:any) => {
+      callback(res)
+    });
+  };
+
+
   const remoteDataSource = {
     url: 'https://randomuser.me/api',
     method: 'get',
-
-    // convertParams({ params }) {
-    //   // 剔除对象里面为空的字段
-    //   const filters = params?.filters || {};
-    //   for (const key in filters) {
-    //     if (!filters[key]) {
-    //       delete filters[key];
-    //     }
-    //   }
-    //   /**日期字段特殊处理 */
-    //   if (filters.rangePickerCutomerPlug) {
-    //     const [dateStart, dateEnd] = filters.rangePickerCutomerPlug;
-    //     filters.dateStart = dateStart;
-    //     filters.dateEnd = dateEnd;
-    //     delete filters.rangePickerCutomerPlug;
-    //   }
-   
-    //   return {
-    //     results: params.pageSize,
-    //     ...filters,
-    //   };
-    // },
-    convertParams: 'tableConvertParamsType',
+    convertParams:  ({ params }) => {
+      // 剔除对象里面为空的字段
+      const filters = params?.filters || {};
+      for (const key in filters) {
+        if (!filters[key]) {
+          delete filters[key];
+        }
+      }
+      /**日期字段特殊处理 */
+      if (filters.rangePickerCutomerPlug) {
+        const [dateStart, dateEnd] = filters.rangePickerCutomerPlug;
+        filters.dateStart = dateStart;
+        filters.dateEnd = dateEnd;
+        delete filters.rangePickerCutomerPlug;
+      }
+      let val = {}
+      myTestFn((val: any) => {
+        console.log(val)
+        return val;
+      })
+      
+      // return {
+      //   results: params.pageSize,
+      //   ...filters,
+      // };
+    },
+    // convertParams: 'tableConvertParamsType',
     converter({ data, table }) {
       setTableProps(table);
-      console.log('密钥：', encodeAES('longwei'), ',解密：', decodeAES('/L1T+rNDAvk//uRCVMB1Sw=='));
+      // console.log('密钥：', encodeAES('longwei'), ',解密：', decodeAES('/L1T+rNDAvk//uRCVMB1Sw=='));
       return {
         list: data.results.map((item, index) => {
           return {
@@ -68,7 +87,7 @@ export default function BasicDemo() {
     {
       title: '国家',
       key: 'nat',
-      className: 'natStyle'
+      className: 'natStyle',
     },
     {
       title: '名字',
@@ -299,15 +318,15 @@ export default function BasicDemo() {
         console.log(selectedRowKeys, selectedRows);
       },
     },
-    tableProps: { 
+    tableProps: {
       rowClassName: (record) => {
         let text = '';
-        if (record){
+        if (record) {
           text = 'myPaySelectedStyle';
         }
-        return classNames(text)
-      }
-    }
+        return classNames(text);
+      },
+    },
   };
 
   return (
