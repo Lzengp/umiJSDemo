@@ -52,4 +52,5 @@ export default {
   'menu.mypage': '我的页面',
   'menu.myDndPage': '我的看板',
   'menu.sulapage': 'sula页面',
+  'menu.customerPortal': '客户门户',
 };

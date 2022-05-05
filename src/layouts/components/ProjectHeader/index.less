@@ -1,0 +1,94 @@
+.projectHeader {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .leftContent {
+    display: flex;
+    align-items: center;
+    color: #8c8c8c;
+
+    :global {
+      .anticon-star {
+        margin-right: 16px;
+        font-size: 16px;
+        transition: 0.25s;
+
+        &:hover {
+          color: #fa9222;
+        }
+      }
+    }
+  }
+
+  .vertical {
+    height: 16px;
+    width: 1px;
+    margin: 0px 24px;
+    transform: translateY(2px);
+    background-color: #e5ebf2;
+  }
+
+  .tabs {
+    height: 100%;
+
+    :global {
+      .ant-tabs-nav {
+        height: 100%;
+        margin: 0;
+
+        &::before {
+          display: none;
+        }
+      }
+
+      .ant-tabs-content-holder {
+        display: none;
+      }
+
+      .ant-tabs-nav-list {
+        color: #8c8c8c;
+      }
+    }
+  }
+
+  .btn {
+    display: flex;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    padding: 0 8px;
+    line-height: 23px;
+    align-items: center;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #262626;
+    margin-right: 16px;
+    transition: 0.25s;
+
+    &:hover {
+      color: #1b9aee;
+      background-color: #f2fbff;
+    }
+  }
+}
+
+.projectInfo {
+  width: 320px;
+
+  .thumbnail {
+    height: 145px;
+    background-image: url('https://tcs-ga.teambition.net/thumbnail/111t2d107ce5f71ef2a427689600dee51c4b/w/600/h/300');
+    background-size: 100% 100%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  :global {
+    .ant-form-item {
+      margin: 0;
+      margin-top: 8px;
+    }
+  }
+}
