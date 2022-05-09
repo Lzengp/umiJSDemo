@@ -29,6 +29,7 @@ registerFilterPlugins();
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
+const candidateLogin = '/candidate/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -53,7 +54,7 @@ export async function getInitialState(): Promise<{
     return undefined;
   };
   // 如果是登录页面，不执行
-  if (history.location.pathname !== loginPath) {
+  if (![loginPath, candidateLogin].includes(history.location.pathname)) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,

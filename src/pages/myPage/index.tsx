@@ -16,7 +16,7 @@ import styles from './index.less';
 import FlightCourseSelection from './components/FlightCourseSelection';
 import request from 'umi-request';
 import { useEffect } from 'react';
-import { GetWeek } from 'lzengp-util';
+import { GetWeek, duplicateRemoval } from 'lzengp-util';
 
 interface MyPageProps {}
 
@@ -24,16 +24,30 @@ function MyPage(props: MyPageProps) {
   const {} = props;
 
   const sleep = (timeout: number) => {
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve('ok')
+        resolve('ok');
       }, timeout);
-    })
- 
-  }
+    });
+  };
+
+//   function duplicateRemoval(arr: Array<{}> = [], field: string) {
+//     const obj: any = {}
+//     return arr.reduce((cur: any, next: any, index: number) => {
+//         if (!obj[next[field]]) {
+//             obj[next[field]] = true
+//             cur.push(next)
+//         }
+//         return cur
+//     }, [])
+// }
 
   useEffect(() => {
-    console.log('xxxx', GetWeek('', true))
+    console.log(
+      'xxxx',
+      GetWeek('', true),
+      duplicateRemoval([{ value: 1 }, { value: 1 }, { value: 2 }], 'value'),
+    );
     // request
     //   .get(
     //     'https://proapi.azurewebsites.net/github/issues', {
@@ -60,10 +74,13 @@ function MyPage(props: MyPageProps) {
         current: 1,
         pageSize: 5,
       },
-    }).then(res => {console.log(res); data = res;});
-    const a = await sleep(100)
-    console.log(data)
-  }
+    }).then((res) => {
+      console.log(res);
+      data = res;
+    });
+    const a = await sleep(100);
+    console.log(data);
+  };
 
   const components = [
     <FlightCourseSelection />,

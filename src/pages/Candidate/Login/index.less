@@ -1,0 +1,40 @@
+.candidateLoginWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow: auto;
+  // background: url('~@/assets/lg_bg.png');
+  background: linear-gradient(90deg, #ffffff 32%, #fdf6f3);
+  // background-repeat: no-repeat;
+
+  .leftBg {
+    position: absolute;
+    left: 0;
+    height: 100vh;
+  }
+
+  .main {
+    position: absolute;
+    right: calc((100vw / 2 - 400px) * 2 / 3);
+    width: 400px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 51px 33px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 0px rgba(255, 86, 42, 0.1);
+
+    // @media screen and (max-width: @screen-sm) {
+    //   width: 95%;
+    //   max-width: 328px;
+    // }
+
+    .companyName {
+      padding-bottom: 20px;
+      font-weight: 600;
+      font-size: 25px;
+      text-align: center;
+    }
+  }
+}

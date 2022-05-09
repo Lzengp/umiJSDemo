@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { history } from 'umi';
+import { Input, Modal } from 'antd';
 
 let timer: any = null;
-let maxTime = 600;
+let maxTime = 10;
 const CustomerPortal = () => {
   const [minutes, setMinutes] = useState<string>('10');
   const [seconds, setSeconds] = useState<string>('00');
+  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
     // 监听鼠标移动
     document.addEventListener('mousemove', () => {
-      maxTime = 600;
+      maxTime = 10;
     });
 
     // 监听键盘按下事件
     document.addEventListener('keydown', () => {
-      maxTime = 600;
+      console.log(maxTime)
+      maxTime = 10;
     });
 
     countDownFn();
@@ -35,12 +38,19 @@ const CustomerPortal = () => {
           const sec = Math.floor(maxTime % 60).toString();
           return sec.length == 1 ? `0${sec}` : sec;
         });
+        if (maxTime == 0) {
+          setVisible(true);
+        }
         --maxTime;
       } else {
-        clearInterval(timer);
+        // clearInterval(timer);
       }
     }, 1000);
   };
+
+  const hideModal = () => {
+    setVisible(false);
+  }
 
   return (
     <div className={styles.customerPortalWrap}>
@@ -67,6 +77,14 @@ const CustomerPortal = () => {
         <div>
           时间倒计时：{minutes}:{seconds}
         </div>
+        <Modal
+          title="弹窗"
+          visible={visible}
+          onOk={hideModal}
+          onCancel={hideModal}
+        >
+          号码：<Input />
+        </Modal>
       </div>
     </div>
   );

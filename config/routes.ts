@@ -1,5 +1,18 @@
 ﻿export default [
   {
+      path: '/candidate',
+      routes: [
+        {
+          name: 'login',
+          path: '/candidate/login',
+          component: './candidate/Login',
+        },
+        {
+          component: './404',
+        },
+      ],
+  },
+  {
     path: '/user',
     layout: false,
     routes: [
