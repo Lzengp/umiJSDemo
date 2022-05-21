@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
-import { history } from 'umi';
+import { history, useSelector } from 'umi';
 import { Input, Modal } from 'antd';
 
 let timer: any = null;
-let maxTime = 10;
+let currentMaxTime = 100;
 const CustomerPortal = () => {
-  const [minutes, setMinutes] = useState<string>('10');
+  const [minutes, setMinutes] = useState<string>('00');
   const [seconds, setSeconds] = useState<string>('00');
-  const [visible, setVisible] = useState<boolean>(true);
+  const [visible, setVisible] = useState<boolean>(false);
+
+  let { maxTime, countDownStr } = useSelector((state: any) => state.algorithm);
 
   useEffect(() => {
     // 监听鼠标移动
-    document.addEventListener('mousemove', () => {
-      maxTime = 10;
-    });
+    // document.addEventListener('mousemove', () => {
+    //   currentMaxTime = 10;
+    // });
 
-    // 监听键盘按下事件
-    document.addEventListener('keydown', () => {
-      console.log(maxTime)
-      maxTime = 10;
-    });
-
+    // // 监听键盘按下事件
+    // document.addEventListener('keydown', () => {
+    //   console.log(currentMaxTime)
+    //   currentMaxTime = 10;
+    // });
     countDownFn();
     return () => {
       clearInterval(timer);
@@ -30,18 +31,18 @@ const CustomerPortal = () => {
 
   const countDownFn = () => {
     timer = setInterval(() => {
-      if (maxTime >= 0) {
+      if (currentMaxTime >= 0) {
         setMinutes(() => {
-          return Math.floor(maxTime / 60).toString();
+          return Math.floor(currentMaxTime / 60).toString();
         });
         setSeconds(() => {
-          const sec = Math.floor(maxTime % 60).toString();
+          const sec = Math.floor(currentMaxTime % 60).toString();
           return sec.length == 1 ? `0${sec}` : sec;
         });
-        if (maxTime == 0) {
+        if (currentMaxTime == 0) {
           setVisible(true);
         }
-        --maxTime;
+        --currentMaxTime;
       } else {
         // clearInterval(timer);
       }
@@ -75,16 +76,19 @@ const CustomerPortal = () => {
       </div>
       <div className={styles.content}>
         <div>
-          时间倒计时：{minutes}:{seconds}
+          当前页时间倒计时：{minutes}:{seconds}
         </div>
-        <Modal
+        <div>
+          全局倒计时：{countDownStr}
+        </div>
+        {/* <Modal
           title="弹窗"
           visible={visible}
           onOk={hideModal}
           onCancel={hideModal}
         >
           号码：<Input />
-        </Modal>
+        </Modal> */}
       </div>
     </div>
   );

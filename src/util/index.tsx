@@ -136,3 +136,14 @@ export const fn = (val: number) => {
   }
   console.log(resArr)
 }
+
+/**
+ * 传入秒，返回时间格式
+ * @param maxTime 时间/秒，例如：30
+ * @returns 返回时间格式字符串，例如：00:30
+ */
+export const getTimeStrBySec = (maxTime: number) => {
+  const second = Math.floor(maxTime % 60).toString();
+  const minute = Math.floor(maxTime / 60).toString();
+  return `${minute.length == 1 ? `0${minute}` : minute}:${second.length == 1 ? `0${second}` : second}`
+}
