@@ -1,7 +1,6 @@
 import CustomSelect from '@/components/CustomSelect';
 import DragDropTable from '@/components/DragDropTable';
 import EditableTable from '@/components/EditableTable';
-import PriorityConfig from '@/components/PriorityConfig';
 import Algorithm from './components/Algorithm';
 import AntdTable from './components/AntdTable';
 import CssTest from './components/CssTest';
@@ -17,6 +16,7 @@ import FlightCourseSelection from './components/FlightCourseSelection';
 import request from 'umi-request';
 import { useEffect } from 'react';
 import { GetWeek, duplicateRemoval } from 'lzengp-util';
+import VideoAndPrint from './components/VideoAndPrint';
 
 interface MyPageProps {}
 
@@ -31,16 +31,16 @@ function MyPage(props: MyPageProps) {
     });
   };
 
-//   function duplicateRemoval(arr: Array<{}> = [], field: string) {
-//     const obj: any = {}
-//     return arr.reduce((cur: any, next: any, index: number) => {
-//         if (!obj[next[field]]) {
-//             obj[next[field]] = true
-//             cur.push(next)
-//         }
-//         return cur
-//     }, [])
-// }
+  //   function duplicateRemoval(arr: Array<{}> = [], field: string) {
+  //     const obj: any = {}
+  //     return arr.reduce((cur: any, next: any, index: number) => {
+  //         if (!obj[next[field]]) {
+  //             obj[next[field]] = true
+  //             cur.push(next)
+  //         }
+  //         return cur
+  //     }, [])
+  // }
 
   useEffect(() => {
     console.log(
@@ -83,6 +83,7 @@ function MyPage(props: MyPageProps) {
   };
 
   const components = [
+    <VideoAndPrint />,
     <FlightCourseSelection />,
     // <Canvas />,
     <NativeDrag />,

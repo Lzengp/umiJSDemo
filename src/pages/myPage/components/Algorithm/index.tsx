@@ -30,7 +30,23 @@ function Algorithm(props: Props) {
       type: `algorithm/fetchAlgorithmObj`,
       payload: { value: 'testValue', name: 'longwei' },
     });
+    console.log('冒泡排序：',  bubbleSorting([1, 5, 6, 2, 4,11,6,4,0,-1]))
+
   }, []);
+
+  // 冒泡排序
+  const bubbleSorting = (list: number[]) => {
+    list.forEach(() => {
+      for(let i = 1; i < list.length; i++) {
+        const num = list[i];
+        if (list[i - 1] >= list[i]) {
+          list[i] = list[i - 1];
+          list[i - 1] = num;
+        }
+      }
+    })
+    return list;
+  }
 
   const countDown = useCallback(() => {
     const countDownTimer = setInterval(() => {
