@@ -96,6 +96,13 @@
         title: '客户门户'
       },
       {
+        name: '串口调试',
+        icon: 'smile',
+        path: '/SerialPort',
+        component: './SerialPort',
+        title: '串口调试'
+      },
+      {
         component: './404',
       },
     ],

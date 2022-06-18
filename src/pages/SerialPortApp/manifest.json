@@ -1,0 +1,26 @@
+{
+    "name": "Serial Port App",
+    "version": "0.1.1",
+    "manifest_version": 2,
+
+    "description": "The Serial Port Interface provide a simple API interface to interact with  your web application, so that your web page can cummunicate with  the  serial ports on your PC.",
+    "icons": {
+        "48": "icon.png"
+    },
+
+    "author": "Longwei",
+
+    "app": {
+        "background": {
+            "scripts": ["serial_interface.js"]
+        }
+    },
+    "permissions": [
+        "serial"
+    ],
+    "minimum_chrome_version": "33",
+
+    "externally_connectable": {
+        "matches": ["*://longwei.test.com/*"]
+    }
+}
