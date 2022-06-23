@@ -147,3 +147,40 @@ export const getTimeStrBySec = (maxTime: number) => {
   const minute = Math.floor(maxTime / 60).toString();
   return `${minute.length == 1 ? `0${minute}` : minute}:${second.length == 1 ? `0${second}` : second}`
 }
+
+const letters = [
+  'A', 'B', 'C', 'D', 'E', 'F', 'G',
+  'H', 'I', 'J', 'K', 'L', 'M', 'N',
+  'O', 'P', 'Q', 'R', 'S', 'T',
+  'U', 'V', 'W', 'X', 'Y', 'Z'
+];
+
+/**
+ * 数字转换成字符，A-Z AA-AZ BA-BZ...
+ * @param num 传入的数子
+ * @returns 0 -> A 1->B 26->AA
+ */
+export const transformNumToLetter = function (num: number) {
+  let letter = "";
+  let loopNum = parseInt((num / 26).toString());
+  if(loopNum>0){
+      letter += transformNumToLetter(loopNum-1);
+  }
+  letter += letters[num%26];
+  return letter;
+};
+
+/**
+ * 字符转换成数字
+ * @param letter 传入的字符
+ * @returns A -> 0 B -> 1 AA -> 26
+ */
+ export const transformLetterToNum = function (str: string) {
+  let num = 0;
+  const letterArr = str.split('');
+  letterArr.map((letter, index) => {
+    const letterIndex = letters.findIndex(item => item == letter)
+    num += index * 26 + letterIndex;
+  })
+  return num;
+};
