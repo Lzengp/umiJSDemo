@@ -40,15 +40,25 @@ const VideoAndPrint = () => {
     let ctx = canvas.getContext('2d');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const base64Str = canvas.toDataURL('image/png'); // 一定要同源的视频地址，不然toDataURL会报错
-    const list = [...imgList];
-    list.push(base64Str);
-    setImgList(list);
-    const file = dataURLtoFile(base64Str, '图片1.png');
-    const formData = new FormData();
-    formData.append('file', file);
-    console.log(formData, file);
+    // ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // const base64Str = canvas.toDataURL('image/png'); // 一定要同源的视频地址，不然toDataURL会报错
+    const image = new Image();
+    image.crossOrigin = "Anonymous";
+    image.onload = function(){
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var base64Url = canvas.toDataURL("image/png");
+        console.log(base64Url);
+    };
+    // image.src = imageSrc;
+    console.log(image);
+
+    // const list = [...imgList];
+    // list.push(base64Str);
+    // setImgList(list);
+    // const file = dataURLtoFile(base64Str, '图片1.png');
+    // const formData = new FormData();
+    // formData.append('file', file);
+    // console.log(formData, file);
   };
 
   const dataURLtoFile = (dataurl, filename) => {
@@ -109,10 +119,10 @@ const VideoAndPrint = () => {
         // x5-video-player-type="h5"
         // x5-video-player-fullscreen="true"
         // x5-video-ignore-metadata="true"
-        src="/beixuan.mp4"
-        type="video/mp4"
+        // src="/beixuan.mp4"
+        // type="video/mp4"
       >
-        {/* <source src="/beixuan.mp4" type="video/mp4" /> */}
+         <source src="https://www.runoob.com/try/demo_source/movie.mp4" type="video/mp4"></source>
       </video>
 
       <Button

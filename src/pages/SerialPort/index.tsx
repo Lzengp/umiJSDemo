@@ -23,16 +23,40 @@ const SerialPortPage = () => {
   const [onDataReceivedValue, setonDataReceivedValue] = useState<any>(); // 接收到串口的数据
   const [isLinkSerialPort, setIsLinkSerialPort] = useState<boolean>(false); // 是否连接串口
 
+  let port = null;
+
   useEffect(() => {
-    isAppInstalled((value) => {
-      value ? message.success(`已安装串口Chrome App`) : message.error(`未安装Chrome App`);
-    });
-    portOnMessage();
-    getDevicesList();
+    // 使用app的ID与app建立外部连接，连接一旦建立，web端和app都想获得一个port对象
+    port = chrome.runtime?.connect(extensionId);
+    if (port) {
+      isAppInstalled((value) => {
+        value ? message.success(`已安装串口Chrome App`) : message.error(`未安装Chrome App`);
+      });
+      portOnMessage();
+      getDevicesList();
+    }
   }, []);
 
-  // 使用app的ID与app建立外部连接，连接一旦建立，web端和app都想获得一个port对象
-  var port = chrome.runtime.connect(extensionId);
+  // let extensionId = '';
+
+  // useEffect(() => {
+  //   extensionId = localStorage.getItem('chromeAppId'); // Chrome App Id, 请在安装电脑的localStorage写上id
+  // }, []);
+
+  // useEffect(() => {
+  //   let port: any;
+  //   if (extensionId && chrome.runtime && chrome.runtime.connect) {
+  //     // 使用app的ID与app建立外部连接，连接一旦建立，web端和app都想获得一个port对象
+  //     port = chrome.runtime?.connect(extensionId);
+  //     isAppInstalled(() => {});
+  //     port?.onMessage.addListener(onMessageListenerFn);
+  //   }
+  //   return () => {
+  //     // 页面销毁，关闭串口，不然下次连接不上
+  //     closePort(connectionId, () => {});
+  //     port?.onMessage.removeListener(onMessageListenerFn); // 关闭监听
+  //   };
+  // }, [extensionId]);
 
   /**
    * 尝试打开一个串口
@@ -139,7 +163,7 @@ const SerialPortPage = () => {
       } else if (msg.header === 'serialdata') {
         onNewData(new Uint8Array(msg.data).buffer);
       } else if (msg.header === 'serialerror') {
-        console.log(msg)
+        console.log(msg);
         message.error(msg.error);
       }
     });

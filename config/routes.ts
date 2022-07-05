@@ -103,6 +103,24 @@
         title: '串口调试'
       },
       {
+        path: '/personalTestPge',
+        name: '个人测试页面',
+        icon: 'crown',
+        access: 'canAdmin',
+        // component: './Admin',
+        routes: [
+          {
+            path: '/personalTestPge/screenSharing',
+            name: '屏幕共享',
+            icon: 'smile',
+            component: './PersonalTestPge/ScreenSharing',
+          },
+          {
+            component: './404',
+          },
+        ],
+      },
+      {
         component: './404',
       },
     ],
