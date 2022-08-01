@@ -22,6 +22,21 @@ interface MyPageProps {}
 
 function MyPage(props: MyPageProps) {
   const {} = props;
+  
+  useEffect(() => {
+      // IntersectionObserver接口 (从属于Intersection Observer API) 提供了一种异步观察目标元素与其祖先元素或顶级文档视窗 (viewport) 交叉状态的方法
+      // 返回观察器实例
+      const intersectionObserver = new IntersectionObserver(function (entries) {
+          console.log(entries[0])
+          if (entries[0].intersectionRatio <= 0) return;
+          if (entries[0].intersectionRatio > 0) {
+              console.log('元素已经到达可视范围')
+          }
+      });
+      if (document.querySelector('.scrollerFooter')) {
+          intersectionObserver.observe(document.querySelector('.scrollerFooter'));
+      }
+  }, []);
 
   const sleep = (timeout: number) => {
     return new Promise((resolve, reject) => {
@@ -110,6 +125,7 @@ function MyPage(props: MyPageProps) {
           {item}
         </div>
       ))}
+      <div className='scrollerFooter'>观察者测试</div>
     </>
   );
 }
